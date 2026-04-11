@@ -295,6 +295,7 @@ function onReceiptPointerMove(e) {
 function onReceiptPointerUp(e) {
   if (!isReceiptDragging.value) return;
   isReceiptDragging.value = false;
+  try { e.currentTarget?.releasePointerCapture(e.pointerId); } catch (_) {}
 
   const cx = e.clientX - dragOffX.value;
   const cy = e.clientY - dragOffY.value;
@@ -341,6 +342,7 @@ function onBillsPointerMove(e) {
 function onBillsPointerUp(e) {
   if (!isBillsDragging.value) return;
   isBillsDragging.value = false;
+  try { e.currentTarget?.releasePointerCapture(e.pointerId); } catch (_) {}
 
   const cx = e.clientX - dragOffX.value;
   const cy = e.clientY - dragOffY.value;
@@ -438,6 +440,7 @@ function onBillsPointerUp(e) {
                      :class="ejecting ? 'eject-container' : ''"
                      style="--peek-h:52px; position:absolute; top:100%; left:50%; margin-left:-55px; width:110px; height:52px; overflow:hidden;">
                 <button
+                  class="touch-none select-none"
                   :style="isDragging
                     ? `position:fixed; left:${dragX}px; top:${dragY}px; width:110px; height:174px; transform:translate(-50%,-50%); z-index:9998; cursor:grabbing;`
                     : cardFloating
@@ -537,6 +540,7 @@ function onBillsPointerUp(e) {
                      :class="receiptEjecting ? 'eject-container' : ''"
                      style="--peek-h:57px; position:absolute; top:100%; left:50%; margin-left:-35px; width:70px; height:57px; overflow:hidden;">
                 <button
+                  class="touch-none select-none"
                   :style="isReceiptDragging
                     ? `position:fixed; left:${dragX}px; top:${dragY}px; width:${RECEIPT_W_LS}px; height:${RECEIPT_H_LS}px; transform:translate(-50%,-50%); z-index:9998; cursor:grabbing;`
                     : receiptFloating
@@ -618,6 +622,7 @@ function onBillsPointerUp(e) {
             <div v-if="billsVisible"
                  style="width:275px; height:97px; overflow:hidden; position:relative; margin-top:-4px;">
               <button
+                class="touch-none select-none"
                 :style="isBillsDragging
                   ? `position:fixed; left:${dragX}px; top:${dragY}px; width:${BILLS_W_LS}px; height:${BILLS_H_LS}px; transform:translate(-50%,-50%); z-index:9998; cursor:grabbing;`
                   : billsFloating
@@ -725,6 +730,7 @@ function onBillsPointerUp(e) {
               </div>
               <div style="width: 110px; height: 174px;">
                   <button v-if="cardVisible && !cardInReader && !swallowing"
+                          class="touch-none select-none"
                           :style="isDragging
                             ? `position:fixed; left:${dragX}px; top:${dragY}px; width:110px; height:174px; transform:translate(-50%,-50%); z-index:9998; cursor:grabbing;`
                             : cardFloating
@@ -835,6 +841,7 @@ function onBillsPointerUp(e) {
                    :class="ejecting ? 'eject-container' : ''"
                    style="--peek-h:38px; position:absolute; top:100%; left:50%; margin-left:-40px; width:80px; height:38px; overflow:hidden;">
               <button
+                class="touch-none select-none"
                 :style="isDragging
                   ? `position:fixed; left:${dragX}px; top:${dragY}px; width:80px; height:127px; transform:translate(-50%,-50%); z-index:9998; cursor:grabbing;`
                   : cardFloating
@@ -887,6 +894,7 @@ function onBillsPointerUp(e) {
                    :class="receiptEjecting ? 'eject-container' : ''"
                    style="--peek-h:43px; position:absolute; top:100%; left:50%; margin-left:-27px; width:54px; height:43px; overflow:hidden;">
               <button
+                class="touch-none select-none"
                 :style="isReceiptDragging
                   ? `position:fixed; left:${dragX}px; top:${dragY}px; width:${RECEIPT_W_PT}px; height:${RECEIPT_H_PT}px; transform:translate(-50%,-50%); z-index:9998; cursor:grabbing;`
                   : receiptFloating
@@ -963,6 +971,7 @@ function onBillsPointerUp(e) {
             <div v-if="billsVisible"
                  style="width:190px; height:67px; overflow:hidden; position:relative; margin-top:-8px;">
               <button
+                class="touch-none select-none"
                 :style="isBillsDragging
                   ? `position:fixed; left:${dragX}px; top:${dragY}px; width:${BILLS_W_PT}px; height:${BILLS_H_PT}px; transform:translate(-50%,-50%); z-index:9998; cursor:grabbing;`
                   : billsFloating
@@ -1054,6 +1063,7 @@ function onBillsPointerUp(e) {
               </div>
               <div style="width: 80px; height: 127px;">
                   <button v-if="cardVisible && !cardInReader && !swallowing"
+                          class="touch-none select-none"
                           :style="isDragging
                             ? `position:fixed; left:${dragX}px; top:${dragY}px; width:80px; height:127px; transform:translate(-50%,-50%); z-index:9998; cursor:grabbing;`
                             : cardFloating
