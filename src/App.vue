@@ -1,0 +1,39 @@
+<script setup>
+import { computed } from "vue";
+import AtmShell from "./components/AtmShell.vue";
+import { useAtmState } from "./composables/useAtmState.js";
+import ScreenAccueil from "./screens/ScreenAccueil.vue";
+import ScreenBillets from "./screens/ScreenBillets.vue";
+import ScreenCarteBloquee from "./screens/ScreenCarteBloquee.vue";
+import ScreenCode from "./screens/ScreenCode.vue";
+import ScreenLangue from "./screens/ScreenLangue.vue";
+import ScreenMontant from "./screens/ScreenMontant.vue";
+import ScreenOperation from "./screens/ScreenOperation.vue";
+import ScreenProgression from "./screens/ScreenProgression.vue";
+import ScreenRecu from "./screens/ScreenRecu.vue";
+import ScreenRemerciement from "./screens/ScreenRemerciement.vue";
+import ScreenStats from "./screens/ScreenStats.vue";
+
+const screens = {
+  ScreenAccueil,
+  ScreenProgression,
+  ScreenStats,
+  ScreenLangue,
+  ScreenOperation,
+  ScreenMontant,
+  ScreenCode,
+  ScreenRecu,
+  ScreenBillets,
+  ScreenRemerciement,
+  ScreenCarteBloquee,
+};
+
+const { currentScreen } = useAtmState();
+const activeScreen = computed(() => screens[currentScreen.value]);
+</script>
+
+<template>
+  <AtmShell>
+    <component :is="activeScreen" />
+  </AtmShell>
+</template>
