@@ -1,6 +1,13 @@
 # DAB Trainer
 
-**[🇬🇧 English below](#english-version)**
+[![Live](https://img.shields.io/badge/demo-live-brightgreen?style=flat-square)](https://cedric-ruiu.github.io/atm-trainer/)
+[![Vue 3](https://img.shields.io/badge/Vue-3-42b883?style=flat-square&logo=vue.js)](https://vuejs.org/)
+[![Vite](https://img.shields.io/badge/Vite-8-646cff?style=flat-square&logo=vite)](https://vitejs.dev/)
+[![Tailwind CSS v4](https://img.shields.io/badge/Tailwind-v4-38bdf8?style=flat-square&logo=tailwindcss)](https://tailwindcss.com/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
+[![GitHub Pages](https://img.shields.io/badge/deploy-GitHub%20Pages-222?style=flat-square&logo=github)](https://cedric-ruiu.github.io/atm-trainer/)
+
+## 👉 [https://cedric-ruiu.github.io/atm-trainer/](https://cedric-ruiu.github.io/atm-trainer/)
 
 ---
 
@@ -10,7 +17,7 @@
 
 **DAB Trainer** est un simulateur de distributeur automatique de billets (DAB) conçu pour aider les personnes ayant des difficultés cognitives à s'entraîner à utiliser un vrai guichet automatique.
 
-L'application reproduit les étapes d'un retrait bancaire réel : insertion de la carte, sélection de la langue, choix de l'opération, saisie du montant, entrée du code PIN, récupération des billets et du reçu. Chaque interaction physique — glisser la carte, retirer les billets — est simulée de façon intuitive.
+L'application reproduit fidèlement les étapes d'un retrait : insertion de la carte, saisie du code PIN, retrait des billets et du reçu — chaque geste physique est simulé de façon intuitive. Elle intègre également un suivi de progression de l'utilisateur avec le taux de réussite de la série en cours.
 
 ### À qui s'adresse-t-il ?
 
@@ -20,29 +27,7 @@ L'application reproduit les étapes d'un retrait bancaire réel : insertion de l
 
 ### Utilisation
 
-L'application est directement accessible en ligne (aucune installation requise) :
-
-👉 **[https://cedric-ruiu.github.io/atm-trainer/](https://cedric-ruiu.github.io/atm-trainer/)**
-
-Elle fonctionne sur tablette et navigateur de bureau. Pensez à utiliser le mode plein écran pour une expérience optimale.
-
-### Stack technique
-
-| Outil | Version |
-|---|---|
-| Vue | 3 (Composition API, `script setup`) |
-| Vite | 8 |
-| Tailwind CSS | v4 |
-| Biome | linter / formatter |
-| Déploiement | GitHub Pages |
-
-### Lancer le projet en local
-
-```bash
-# Prérequis : Node 22, Yarn 4
-yarn install
-yarn dev
-```
+L'application est directement accessible en ligne (aucune installation requise). Elle fonctionne sur tablette et navigateur de bureau. Pensez à utiliser le mode plein écran pour une expérience optimale.
 
 ### Contribuer
 
@@ -61,13 +46,13 @@ Les contributions sont les bienvenues, qu'elles viennent de développeurs ou de 
 
 ---
 
-## English version
+## 🇬🇧 English version
 
 ### What is it?
 
 **DAB Trainer** is an ATM simulator designed to help people with cognitive difficulties practice using a real cash machine.
 
-The app reproduces the steps of a real cash withdrawal: inserting the card, selecting the language, choosing an operation, entering the amount, typing the PIN, collecting the banknotes and the receipt. Each physical interaction — sliding the card, taking the bills — is simulated in an intuitive way.
+The app faithfully reproduces each step of a withdrawal — inserting the card, entering the PIN, collecting the bills and the receipt — with every physical gesture simulated intuitively. It also includes user progress tracking with success rate and current streak.
 
 ### Who is it for?
 
@@ -77,29 +62,7 @@ The app reproduces the steps of a real cash withdrawal: inserting the card, sele
 
 ### Try it
 
-The app is available online — no installation required:
-
-👉 **[https://cedric-ruiu.github.io/atm-trainer/](https://cedric-ruiu.github.io/atm-trainer/)**
-
-Works on tablet and desktop browsers. Full-screen mode is recommended.
-
-### Tech stack
-
-| Tool | Version |
-|---|---|
-| Vue | 3 (Composition API, `script setup`) |
-| Vite | 8 |
-| Tailwind CSS | v4 |
-| Biome | linter / formatter |
-| Deploy | GitHub Pages |
-
-### Run locally
-
-```bash
-# Prerequisites: Node 22, Yarn 4
-yarn install
-yarn dev
-```
+The app is available online — no installation required. Works on tablet and desktop browsers. Full-screen mode is recommended.
 
 ### Contributing
 
