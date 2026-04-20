@@ -14,7 +14,7 @@ defineEmits(["update:modelValue"]);
   >
     <div
       v-if="modelValue"
-      class="fixed inset-0 z-[9500] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+      class="fixed inset-0 z-9500 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
       @click.self="$emit('update:modelValue', false)"
     >
       <div class="relative w-full max-w-lg max-h-[90dvh] overflow-y-auto rounded-2xl text-white"
@@ -22,7 +22,7 @@ defineEmits(["update:modelValue"]);
 
         <!-- Close button -->
         <button
-          class="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-colors text-lg font-light"
+          class="btn absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-colors text-lg font-light"
           aria-label="Fermer"
           @click="$emit('update:modelValue', false)"
         >×</button>
@@ -106,17 +106,33 @@ defineEmits(["update:modelValue"]);
           <!-- Credits -->
           <section>
             <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-2">Crédits</h2>
-            <p class="text-gray-400 text-xs leading-relaxed">
-              Son d'applaudissements&nbsp;:
-              <a href="https://lasonotheque.org" target="_blank" rel="noopener noreferrer"
-                 class="text-gray-300 underline hover:text-white transition-colors">
-                La Sonothèque
-              </a>
-              — licence libre (équivalent domaine public).
-            </p>
+            <ul class="text-gray-400 text-xs leading-relaxed space-y-1">
+              <li>Résidence la Belle Vie — Pontivy</li>
+              <li>Jérémy Jaskolski — éducateur spécialisé</li>
+              <li>Alice Dupas — contribution</li>
+              <li class="pt-2">
+                Son d'applaudissements&nbsp;:
+                <a href="https://lasonotheque.org" target="_blank" rel="noopener noreferrer"
+                   class="text-gray-300 underline hover:text-white transition-colors">
+                  La Sonothèque
+                </a>
+                — licence libre (équivalent domaine public).
+              </li>
+            </ul>
           </section>
         </div>
       </div>
     </div>
   </Transition>
 </template>
+
+<style scoped>
+.btn {
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: filter 0.12s ease;
+}
+.btn:hover { filter: brightness(1.2); }
+.btn:active { filter: brightness(0.82); }
+</style>
