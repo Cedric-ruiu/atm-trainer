@@ -108,8 +108,9 @@ defineEmits(["update:modelValue"]);
             <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-2">Crédits</h2>
             <ul class="text-gray-400 text-xs leading-relaxed space-y-1">
               <li>Résidence la Belle Vie — Pontivy</li>
-              <li>Jérémy Jaskolski — éducateur spécialisé</li>
+              <li>Jérémy Jaskolski — initiative et conception pédagogique</li>
               <li>Alice Dupas — contribution</li>
+              <li>Cédric Ruiu — développement web</li>
               <li class="pt-2">
                 Son d'applaudissements&nbsp;:
                 <a href="https://lasonotheque.org" target="_blank" rel="noopener noreferrer"

@@ -42,6 +42,10 @@ Les contributions sont les bienvenues, qu'elles viennent de développeurs ou de 
 
 ### Crédits
 
+- Résidence la Belle Vie — Pontivy
+- Jérémy Jaskolski — initiative et conception pédagogique
+- Alice Dupas — contribution
+- Cédric Ruiu — développement web
 - Son d'applaudissements : [La Sonothèque](https://lasonotheque.org) — licence libre (équivalent domaine public), utilisé avec gratitude.
 
 ---
