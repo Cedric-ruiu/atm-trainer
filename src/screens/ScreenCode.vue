@@ -29,7 +29,7 @@ function onConfirm() {
 
   const entered = digits.value.join("");
 
-  if (!currentUser.value) {
+  if (!currentUser.value?.pin) {
     deductAmount();
     navigate("ScreenRecu");
     return;

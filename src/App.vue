@@ -9,14 +9,12 @@ import ScreenCode from "./screens/ScreenCode.vue";
 import ScreenLangue from "./screens/ScreenLangue.vue";
 import ScreenMontant from "./screens/ScreenMontant.vue";
 import ScreenOperation from "./screens/ScreenOperation.vue";
-import ScreenProgression from "./screens/ScreenProgression.vue";
 import ScreenRecu from "./screens/ScreenRecu.vue";
 import ScreenRemerciement from "./screens/ScreenRemerciement.vue";
 import ScreenStats from "./screens/ScreenStats.vue";
 
 const screens = {
   ScreenAccueil,
-  ScreenProgression,
   ScreenStats,
   ScreenLangue,
   ScreenOperation,

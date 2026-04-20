@@ -8,19 +8,16 @@ import { playApplause } from "../utils/sounds.js";
 
 const { navigate } = useAtmState();
 const { currentUser, selectedAmount } = useSession();
-const { getStats, recordSession } = useProgression();
+const { getStats, loadUser, recordSession } = useProgression();
 
 const billsVisible = inject("billsVisible");
 const onBillsClick = inject("onBillsClick");
 
 function finishSession() {
-  if (!currentUser.value) {
-    navigate("ScreenRemerciement");
-    return;
-  }
-  recordSession(currentUser.value.id, true);
-  const { currentStreak } = getStats(currentUser.value.id);
-  if (currentStreak >= 5) playApplause();
+  recordSession(true);
+  currentUser.value = loadUser();
+  const { currentStreak, objectif } = getStats();
+  if (currentStreak >= objectif) playApplause();
   navigate("ScreenRemerciement");
 }
 

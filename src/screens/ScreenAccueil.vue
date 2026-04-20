@@ -59,7 +59,7 @@ onMounted(() => {
     <!-- Bouton progression discret -->
     <button
       class="absolute bottom-10 right-4 px-3 py-1.5 text-xs text-white/40 hover:text-white/80 rounded transition-colors"
-      @click="navigate('ScreenProgression')"
+      @click="navigate('ScreenStats')"
     >
       Progression
     </button>
