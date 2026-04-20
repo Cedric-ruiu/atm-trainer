@@ -4,11 +4,10 @@ import AtmScreenLayout from "../components/AtmScreenLayout.vue";
 import { useAtmState } from "../composables/useAtmState.js";
 import { useProgression } from "../composables/useProgression.js";
 import { useSession } from "../composables/useSession.js";
-import { playApplause } from "../utils/sounds.js";
 
 const { navigate } = useAtmState();
-const { currentUser, selectedAmount } = useSession();
-const { getStats, loadUser, recordSession } = useProgression();
+const { currentUser } = useSession();
+const { loadUser, recordSession } = useProgression();
 
 const billsVisible = inject("billsVisible");
 const onBillsClick = inject("onBillsClick");
@@ -16,8 +15,6 @@ const onBillsClick = inject("onBillsClick");
 function finishSession() {
   recordSession(true);
   currentUser.value = loadUser();
-  const { currentStreak, objectif } = getStats();
-  if (currentStreak >= objectif) playApplause();
   navigate("ScreenRemerciement");
 }
 

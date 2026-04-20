@@ -21,6 +21,9 @@ export function useProgression() {
     if (success) {
       user.streak++;
       if (user.streak > user.bestStreak) user.bestStreak = user.streak;
+      if (user.streak === user.objectif) {
+        window.dispatchEvent(new CustomEvent("atm-objectif-atteint"));
+      }
     } else {
       user.streak = 0;
     }
