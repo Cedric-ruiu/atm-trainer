@@ -7,7 +7,7 @@ import { useSession } from "../composables/useSession.js";
 
 const { navigate } = useAtmState();
 const { currentUser, resetSession } = useSession();
-const { recordSession } = useProgression();
+const { loadUser, recordSession } = useProgression();
 
 const showFarewell = ref(false);
 let t1 = null;
@@ -17,9 +17,8 @@ onMounted(() => {
   t1 = setTimeout(() => {
     showFarewell.value = true;
     t2 = setTimeout(() => {
-      if (currentUser.value) {
-        recordSession(currentUser.value.id, false);
-      }
+      recordSession(false);
+      currentUser.value = loadUser();
       resetSession();
       navigate("ScreenAccueil");
     }, 10000);

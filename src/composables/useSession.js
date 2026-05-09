@@ -1,6 +1,15 @@
 import { ref } from "vue";
+import { useProgression } from "./useProgression.js";
 
-const currentUser = ref(null);
+const { loadUser, saveUser } = useProgression();
+
+let stored = loadUser();
+if (!stored) {
+  stored = { pin: null, sessions: [], streak: 0, bestStreak: 0, objectif: 5 };
+  saveUser(stored);
+}
+
+const currentUser = ref(stored);
 const selectedAmount = ref(0);
 const pinAttempts = ref(0);
 const transactionType = ref(null); // "express" | "montant" | null

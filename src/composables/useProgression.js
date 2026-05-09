@@ -1,67 +1,54 @@
-const STORAGE_KEY = "atm-trainer-users";
+const STORAGE_KEY = "atm-trainer-session";
 
 export function useProgression() {
-  function loadUsers() {
+  function loadUser() {
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : [];
+      const raw = sessionStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : null;
     } catch {
-      return [];
+      return null;
     }
   }
 
   function saveUser(user) {
-    const users = loadUsers();
-    const index = users.findIndex((u) => u.id === user.id);
-    if (index !== -1) {
-      users[index] = user;
-    } else {
-      users.push(user);
-    }
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(user));
   }
 
-  function recordSession(userId, success) {
-    const users = loadUsers();
-    const user = users.find((u) => u.id === userId);
+  function recordSession(success) {
+    const user = loadUser();
     if (!user) return;
     user.sessions.push({ date: new Date().toISOString(), success });
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
+    if (success) {
+      user.streak++;
+      if (user.streak > user.bestStreak) user.bestStreak = user.streak;
+      if (user.streak === user.objectif) {
+        window.dispatchEvent(new CustomEvent("atm-objectif-atteint"));
+      }
+    } else {
+      user.streak = 0;
+    }
+    saveUser(user);
   }
 
-  function getStats(userId) {
-    const users = loadUsers();
-    const user = users.find((u) => u.id === userId);
-    if (!user) return { total: 0, successes: 0, failures: 0, currentStreak: 0 };
-
+  function getStats() {
+    const user = loadUser();
+    if (!user) return { total: 0, successes: 0, failures: 0, currentStreak: 0, bestStreak: 0, objectif: 5 };
     const sessions = user.sessions;
     const total = sessions.length;
     const successes = sessions.filter((s) => s.success).length;
-    const failures = total - successes;
-
-    let currentStreak = 0;
-    for (let i = sessions.length - 1; i >= 0; i--) {
-      if (sessions[i].success) {
-        currentStreak++;
-      } else {
-        break;
-      }
-    }
-
-    return { total, successes, failures, currentStreak };
+    return {
+      total,
+      successes,
+      failures: total - successes,
+      currentStreak: user.streak,
+      bestStreak: user.bestStreak,
+      objectif: user.objectif,
+    };
   }
 
   function generatePin() {
-    return Array.from({ length: 4 }, () => Math.floor(Math.random() * 10)).join(
-      "",
-    );
+    return Array.from({ length: 4 }, () => Math.floor(Math.random() * 10)).join("");
   }
 
-  return {
-    loadUsers,
-    saveUser,
-    recordSession,
-    getStats,
-    generatePin,
-  };
+  return { loadUser, saveUser, recordSession, getStats, generatePin };
 }

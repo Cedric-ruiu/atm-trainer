@@ -15,14 +15,14 @@
     "format": "biome format --write . && biome check . --write"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.11",
-    "@tailwindcss/vite": "4.2.2",
-    "@vitejs/plugin-vue": "6.0.5",
-    "vite": "8.0.8"
+    "@biomejs/biome": "2.4.14",
+    "@tailwindcss/vite": "4.3.0",
+    "@vitejs/plugin-vue": "6.0.6",
+    "vite": "8.0.11"
   },
   "packageManager": "yarn@4.13.0",
   "dependencies": {
-    "tailwindcss": "4.2.2",
-    "vue": "3.5.32"
+    "tailwindcss": "4.3.0",
+    "vue": "3.5.34"
   }
 }
