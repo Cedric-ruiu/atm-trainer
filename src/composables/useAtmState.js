@@ -2,7 +2,6 @@ import { ref } from "vue";
 
 const VALID_SCREENS = new Set([
   "ScreenAccueil",
-  "ScreenStats",
   "ScreenLangue",
   "ScreenOperation",
   "ScreenMontant",

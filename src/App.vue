@@ -11,11 +11,9 @@ import ScreenMontant from "./screens/ScreenMontant.vue";
 import ScreenOperation from "./screens/ScreenOperation.vue";
 import ScreenRecu from "./screens/ScreenRecu.vue";
 import ScreenRemerciement from "./screens/ScreenRemerciement.vue";
-import ScreenStats from "./screens/ScreenStats.vue";
 
 const screens = {
   ScreenAccueil,
-  ScreenStats,
   ScreenLangue,
   ScreenOperation,
   ScreenMontant,

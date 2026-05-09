@@ -6,12 +6,39 @@ import { useSession } from "../composables/useSession.js";
 const props = defineProps({ modelValue: Boolean });
 const emit = defineEmits(["update:modelValue"]);
 
-const { currentUser } = useSession();
+const { currentUser, solde } = useSession();
 const { generatePin, loadUser, saveUser } = useProgression();
 
 const mode = ref("demo"); // 'manual' | 'generated' | 'demo'
 const manualDigits = ref([]);
 const showPin = ref(false);
+
+const soldeInput = ref("");
+const DEFAULT_SOLDE = 200;
+const QUICK_AMOUNTS = [50, 100, 200, 500];
+
+function setSolde(val) {
+  const n = Math.max(0, Math.round(val / 10) * 10);
+  solde.value = n;
+  soldeInput.value = String(n);
+}
+
+function onSoldeInput(e) {
+  soldeInput.value = e.target.value;
+}
+
+function onSoldeBlur() {
+  const parsed = parseInt(soldeInput.value, 10);
+  if (!isNaN(parsed) && parsed >= 0) {
+    setSolde(parsed);
+  } else {
+    soldeInput.value = String(solde.value);
+  }
+}
+
+function adjustSolde(delta) {
+  setSolde(solde.value + delta);
+}
 
 const hasPin = computed(() => !!currentUser.value?.pin);
 
@@ -28,6 +55,7 @@ watch(
     mode.value = currentUser.value?.pin ? "manual" : "demo";
     manualDigits.value = [];
     showPin.value = false;
+    soldeInput.value = String(solde.value);
   },
 );
 
@@ -83,7 +111,7 @@ function clearPin() {
   >
     <div
       v-if="modelValue"
-      class="fixed inset-0 z-9500 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+      class="fixed inset-0 z-[var(--z-modal)] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
       @click.self="emit('update:modelValue', false)"
     >
       <div
@@ -183,10 +211,64 @@ function clearPin() {
 
           <!-- Clear button -->
           <button
-            class="btn w-full px-4 py-2.5 rounded-lg text-xs font-bold tracking-wide border text-center"
+            class="btn w-full px-4 py-2.5 rounded-lg text-xs font-bold tracking-wide border text-center mb-2"
             style="background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.12); color: rgba(255,255,255,0.45);"
             @click="clearPin"
           >Effacer le code en cours ↺</button>
+
+          <!-- Solde section -->
+          <div class="mt-4 pt-4" style="border-top: 1px solid rgba(255,255,255,0.1);">
+            <p class="text-xs font-bold tracking-widest uppercase text-yellow-400 mb-3">Solde du compte</p>
+
+            <!-- Quick amount buttons -->
+            <div class="flex gap-2 mb-3">
+              <button
+                v-for="a in QUICK_AMOUNTS"
+                :key="a"
+                class="btn flex-1 py-1.5 rounded-lg text-xs font-bold border"
+                :style="solde === a
+                  ? 'background: rgba(0,180,200,0.22); border-color: rgba(0,180,200,0.7); color: white;'
+                  : 'background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.55);'"
+                @click="setSolde(a)"
+              >{{ a }} €</button>
+            </div>
+
+            <!-- +/- controls + input -->
+            <div class="flex items-center gap-2 mb-3">
+              <button
+                class="btn w-10 h-10 rounded-lg text-white font-bold text-xl flex items-center justify-center shrink-0"
+                style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);"
+                @click="adjustSolde(-10)"
+              >−</button>
+              <div class="relative flex-1">
+                <input
+                  type="number"
+                  min="0"
+                  step="10"
+                  inputmode="numeric"
+                  class="w-full rounded-lg text-center font-mono font-bold text-white text-lg py-2 px-8 outline-none"
+                  style="background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.2);"
+                  :value="soldeInput"
+                  @input="onSoldeInput"
+                  @blur="onSoldeBlur"
+                  @keydown.enter="onSoldeBlur"
+                />
+                <span class="absolute right-2.5 top-1/2 -translate-y-1/2 text-sm text-white/40 pointer-events-none">€</span>
+              </div>
+              <button
+                class="btn w-10 h-10 rounded-lg text-white font-bold text-xl flex items-center justify-center shrink-0"
+                style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);"
+                @click="adjustSolde(10)"
+              >+</button>
+            </div>
+
+            <!-- Reset solde -->
+            <button
+              class="btn w-full px-4 py-2 rounded-lg text-xs font-bold tracking-wide border text-center"
+              style="background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.12); color: rgba(255,255,255,0.45);"
+              @click="setSolde(DEFAULT_SOLDE)"
+            >Réinitialiser le solde ({{ DEFAULT_SOLDE }} €) ↺</button>
+          </div>
         </div>
       </div>
     </div>
@@ -202,4 +284,8 @@ function clearPin() {
 }
 .btn:hover { filter: brightness(1.2); }
 .btn:active { filter: brightness(0.82); }
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type=number] { -moz-appearance: textfield; }
 </style>

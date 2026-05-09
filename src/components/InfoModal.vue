@@ -14,7 +14,7 @@ defineEmits(["update:modelValue"]);
   >
     <div
       v-if="modelValue"
-      class="fixed inset-0 z-9500 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+      class="fixed inset-0 z-[var(--z-modal)] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
       @click.self="$emit('update:modelValue', false)"
     >
       <div class="relative w-full max-w-lg max-h-[90dvh] overflow-y-auto rounded-2xl text-white"
