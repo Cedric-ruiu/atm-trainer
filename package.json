@@ -9,7 +9,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite-ssg build",
     "preview": "vite preview",
     "lint": "biome check .",
     "format": "biome format --write . && biome check . --write"
@@ -18,7 +18,9 @@
     "@biomejs/biome": "2.4.14",
     "@tailwindcss/vite": "4.3.0",
     "@vitejs/plugin-vue": "6.0.6",
-    "vite": "8.0.11"
+    "@vue/server-renderer": "^3.5.34",
+    "vite": "8.0.11",
+    "vite-ssg": "^28.3.0"
   },
   "packageManager": "yarn@4.13.0",
   "dependencies": {
