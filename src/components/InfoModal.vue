@@ -1,6 +1,8 @@
 <script setup>
 defineProps({ modelValue: Boolean });
 defineEmits(["update:modelValue"]);
+
+const baseUrl = import.meta.env.BASE_URL;
 </script>
 
 <template>
@@ -30,8 +32,16 @@ defineEmits(["update:modelValue"]);
         <div class="p-8">
           <!-- Header -->
           <div class="mb-6">
-            <p class="text-xs font-bold tracking-widest uppercase text-yellow-400 mb-1">Outil pédagogique</p>
-            <h1 class="text-2xl font-bold tracking-wide">DAB Trainer</h1>
+            <p class="text-xs font-bold tracking-widest uppercase text-yellow-400 mb-2">Outil pédagogique</p>
+            <h1 class="m-0">
+              <img
+                :src="`${baseUrl}dab-trainer-logo-text.svg`"
+                alt="DAB Trainer — Simulateur de distributeur de billets"
+                width="380"
+                height="70"
+                class="w-full max-w-75 h-auto bg-white rounded-lg p-2"
+              />
+            </h1>
           </div>
 
           <!-- What is it -->

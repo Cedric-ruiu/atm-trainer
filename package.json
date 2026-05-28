@@ -3,13 +3,41 @@
   "type": "module",
   "version": "1.0.0",
   "name": "atm-trainer",
-  "description": "ATM Trainer",
-  "repository": "https://github.com/Cedric-ruiu/atm-trainer.git",
+  "description": "Simulateur de DAB gratuit et open source pour l'apprentissage de l'autonomie financière des personnes en situation de handicap cognitif (ESAT, IME, SAVS).",
+  "keywords": [
+    "atm",
+    "atm-simulator",
+    "dab",
+    "distributeur-automatique-billets",
+    "accessibility",
+    "accessibilite",
+    "handicap-cognitif",
+    "cognitive-disability",
+    "education",
+    "educational-tool",
+    "esat",
+    "ime",
+    "savs",
+    "medico-social",
+    "autonomie",
+    "vue3",
+    "vite",
+    "pwa",
+    "open-source"
+  ],
+  "homepage": "https://cedric-ruiu.github.io/atm-trainer/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Cedric-ruiu/atm-trainer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Cedric-ruiu/atm-trainer/issues"
+  },
   "author": "Cédric Ruiu <cedric.ruiu@gmail.com>",
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite-ssg build",
     "preview": "vite preview",
     "lint": "biome check .",
     "format": "biome format --write . && biome check . --write"
@@ -18,7 +46,9 @@
     "@biomejs/biome": "2.4.14",
     "@tailwindcss/vite": "4.3.0",
     "@vitejs/plugin-vue": "6.0.6",
-    "vite": "8.0.11"
+    "@vue/server-renderer": "^3.5.34",
+    "vite": "8.0.11",
+    "vite-ssg": "^28.3.0"
   },
   "packageManager": "yarn@4.13.0",
   "dependencies": {

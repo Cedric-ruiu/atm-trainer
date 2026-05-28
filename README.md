@@ -1,4 +1,6 @@
-# DAB Trainer
+# DAB Trainer — Simulateur de distributeur automatique de billets
+
+> Outil pédagogique gratuit et open source pour aider les personnes en situation de handicap cognitif à s'entraîner au retrait d'argent. Conçu pour les professionnels du médico-social (ESAT, IME, SAVS) et les familles.
 
 [![Live](https://img.shields.io/badge/demo-live-brightgreen?style=flat-square)](https://cedric-ruiu.github.io/atm-trainer/)
 [![Vue 3](https://img.shields.io/badge/Vue-3-42b883?style=flat-square&logo=vue.js)](https://vuejs.org/)
@@ -82,3 +84,10 @@ Contributions are welcome from developers and field professionals alike!
 ### Credits
 
 - Applause sound: [La Sonothèque](https://lasonotheque.org) — free license (public domain equivalent), used with gratitude.
+
+---
+
+### Mots-clés / Keywords
+
+simulateur DAB, simulateur distributeur automatique billets, entraînement DAB, apprentissage retrait argent, handicap cognitif, troubles DYS, autonomie financière, outil pédagogique handicap, ESAT, IME, SAVS, médico-social, éducateur spécialisé, accessibilité numérique · ATM simulator, ATM trainer, cash machine simulator, cognitive disability, learning disability, accessibility tool, educational software, special education, sheltered workshop, autonomy training, open source, Vue 3, Vite, tablet-friendly.
+

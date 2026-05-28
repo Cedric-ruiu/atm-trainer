@@ -3,8 +3,9 @@ import { useProgression } from "./useProgression.js";
 
 const { loadUser, saveUser } = useProgression();
 
-let stored = loadUser();
-if (!stored) {
+const isBrowser = typeof window !== "undefined";
+let stored = isBrowser ? loadUser() : null;
+if (isBrowser && !stored) {
   stored = { pin: null, sessions: [], streak: 0, bestStreak: 0, objectif: 5 };
   saveUser(stored);
 }
