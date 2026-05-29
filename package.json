@@ -43,16 +43,16 @@
     "format": "biome format --write . && biome check . --write"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.14",
+    "@biomejs/biome": "2.4.16",
     "@tailwindcss/vite": "4.3.0",
-    "@vitejs/plugin-vue": "6.0.6",
-    "@vue/server-renderer": "^3.5.34",
-    "vite": "8.0.11",
+    "@vitejs/plugin-vue": "6.0.7",
+    "@vue/server-renderer": "^3.5.35",
+    "vite": "8.0.14",
     "vite-ssg": "^28.3.0"
   },
   "packageManager": "yarn@4.13.0",
   "dependencies": {
     "tailwindcss": "4.3.0",
-    "vue": "3.5.34"
+    "vue": "3.5.35"
   }
 }
