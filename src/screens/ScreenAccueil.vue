@@ -45,9 +45,9 @@ onMounted(() => {
 
         <!-- Droite : texte -->
         <div class="flex-1 flex flex-col gap-4 pl-4">
-          <h1 class="text-xl font-black tracking-widest uppercase text-white leading-tight">
+          <p class="text-xl font-black tracking-widest uppercase text-white leading-tight">
             INTRODUISEZ<br>VOTRE CARTE
-          </h1>
+          </p>
           <div>
             <p class="text-white/70 text-sm">Billets disponibles :</p>
             <p class="font-bold text-base" style="color: #f0c040">10 € – 20 € – 50 €</p>

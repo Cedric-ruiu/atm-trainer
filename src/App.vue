@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from "vue";
 import AtmShell from "./components/AtmShell.vue";
+import IntroOverlay from "./components/overlays/IntroOverlay.vue";
 import { useAtmState } from "./composables/useAtmState.js";
 import ScreenAccueil from "./screens/ScreenAccueil.vue";
 import ScreenBillets from "./screens/ScreenBillets.vue";
@@ -32,4 +33,5 @@ const activeScreen = computed(() => screens[currentScreen.value]);
   <AtmShell>
     <component :is="activeScreen" />
   </AtmShell>
+  <IntroOverlay />
 </template>

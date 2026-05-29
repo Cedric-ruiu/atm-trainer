@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-site-verification" content="ZFL_Uz5FNhczyHJl4xXeef_O3Hp7MQX5KLSTqeT2_Lc" />
 
+    <!-- Anti-flash : masque la popup d'accueil avant le 1er paint si déjà vue (cf. IntroOverlay.vue). -->
+    <script>try{if(localStorage.getItem("atm-trainer-intro-seen")==="1")document.documentElement.setAttribute("data-intro-seen","");}catch(e){}</script>
+
     <title>DAB Trainer — Simulateur de distributeur de billets</title>
     <meta name="description" content="Simulateur de DAB gratuit pour s'entraîner au retrait d'argent. Outil pédagogique handicap cognitif : ESAT, IME, SAVS, éducateurs spécialisés." />
     <meta name="author" content="Cédric Ruiu" />
@@ -82,7 +85,7 @@
     <div id="app"></div>
     <noscript>
       <div style="max-width:720px;margin:2rem auto;padding:1.5rem;font-family:system-ui,sans-serif;color:#1e293b;">
-        <h1>DAB Trainer — Simulateur de distributeur automatique de billets</h1>
+        <p style="font-size:1.5rem;font-weight:700;margin:0 0 .75rem;">DAB Trainer — Simulateur de distributeur automatique de billets</p>
         <p><strong>DAB Trainer</strong> est un simulateur de distributeur automatique de billets gratuit et open source, conçu pour aider les personnes en situation de handicap cognitif à s'entraîner au retrait d'argent en autonomie.</p>
         <p>L'application reproduit fidèlement les étapes d'un retrait : insertion de la carte, saisie du code PIN, récupération des billets et du reçu. Elle s'adresse aux professionnels du médico-social (ESAT, IME, SAVS, éducateurs spécialisés) ainsi qu'aux familles accompagnant un proche.</p>
         <p>Cette application nécessite JavaScript pour fonctionner. Veuillez l'activer dans votre navigateur.</p>
