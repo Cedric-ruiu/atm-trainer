@@ -4,5 +4,22 @@
     "interfaceLabel": "Interface language",
     "fr": "Français",
     "en": "English"
+  },
+  "meta": {
+    "title": "ATM Trainer — Free Cash Machine Simulator",
+    "description": "Free ATM simulator to practice withdrawing cash. An educational tool for cognitive disabilities and special education — for care professionals and families.",
+    "keywords": "ATM simulator, ATM trainer, cash machine simulator, cognitive disability, learning disability, special education, accessibility tool, educational software, withdrawing cash, autonomy training",
+    "ogTitle": "ATM Trainer — Free Cash Machine Simulator",
+    "ogDescription": "Free and open-source ATM simulator to help people with cognitive disabilities learn to withdraw cash independently.",
+    "twitterDescription": "Free and open-source ATM simulator to help people with cognitive disabilities learn to withdraw cash independently.",
+    "schemaApp": "An ATM (cash machine) simulator designed to help people with cognitive disabilities practice withdrawing cash on their own.",
+    "audience": "People with cognitive disabilities, special education and care professionals, support workers",
+    "featureList": [
+      "Complete simulation of a cash withdrawal at an ATM",
+      "Inserting the card, entering the PIN, collecting the bills and the receipt",
+      "Simulated physical interactions (drag and drop)",
+      "Progress tracking with a customisable streak goal",
+      "Works on tablet and browser, no installation required"
+    ]
   }
 }

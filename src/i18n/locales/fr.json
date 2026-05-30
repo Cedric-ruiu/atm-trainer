@@ -4,5 +4,22 @@
     "interfaceLabel": "Langue de l'interface",
     "fr": "Français",
     "en": "English"
+  },
+  "meta": {
+    "title": "DAB Trainer — Simulateur de distributeur de billets",
+    "description": "Simulateur de DAB gratuit pour s'entraîner au retrait d'argent. Outil pédagogique pour le handicap cognitif : ESAT, IME, SAVS, éducateurs spécialisés.",
+    "keywords": "simulateur DAB, distributeur automatique de billets, handicap cognitif, ESAT, IME, SAVS, autonomie financière, outil pédagogique, apprentissage retrait argent, accessibilité, médico-social",
+    "ogTitle": "DAB Trainer — Simulateur de distributeur de billets",
+    "ogDescription": "Simulateur de DAB gratuit et open source pour l'apprentissage de l'autonomie financière des personnes en situation de handicap cognitif.",
+    "twitterDescription": "Simulateur de DAB gratuit et open source pour l'apprentissage de l'autonomie financière des personnes en situation de handicap cognitif.",
+    "schemaApp": "Simulateur de distributeur automatique de billets conçu pour aider les personnes en situation de handicap cognitif à s'entraîner au retrait d'argent.",
+    "audience": "Personnes en situation de handicap cognitif, professionnels du médico-social (ESAT, IME, SAVS), éducateurs spécialisés",
+    "featureList": [
+      "Simulation complète d'un retrait d'argent au distributeur",
+      "Insertion de la carte, saisie du code PIN, récupération des billets et du reçu",
+      "Interactions physiques simulées (glisser-déposer)",
+      "Suivi de progression et objectif de série personnalisable",
+      "Fonctionne sur tablette et navigateur, sans installation"
+    ]
   }
 }
