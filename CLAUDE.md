@@ -14,6 +14,9 @@ Simulateur de DAB pour l'entraînement de personnes ayant des difficultés cogni
 | Vite | 8 |
 | Tailwind CSS | v4 (`@tailwindcss/vite` — pas de postcss ni de fichier config) |
 | Biome | linter/formatter |
+| vue-router | 5 (2 routes statiques — i18n d'interface uniquement, cf. § i18n) |
+| vue-i18n | 11 (`legacy: false`) |
+| @unhead/vue | **épinglé `^2.x`** (= version embarquée par vite-ssg — v3 casse l'injection SSG) |
 
 ```bash
 yarn dev       # serveur de développement
@@ -33,8 +36,12 @@ yarn preview   # prévisualisation du build
 
 ```
 src/
-├── App.vue                  # Registre statique + composant dynamique
-├── main.js / style.css      # Point d'entrée + @import "tailwindcss"
+├── App.vue                  # <RouterView/> (shell racine)
+├── main.js / style.css      # ViteSSG(App, {routes,base}, …) + @import "tailwindcss"
+├── pages/HomePage.vue       # La page (ex-App.vue) : AtmShell + écran dynamique + IntroOverlay + useHead SEO par locale
+├── i18n/
+│   ├── index.js             # createAppI18n() (instance PAR APP, SSG-safe) + SUPPORTED_LOCALES
+│   └── locales/{fr,en}.json # toutes les chaînes (fr = source de vérité)
 ├── components/
 │   ├── AtmShell.vue         # Châssis physique (provide/inject + D&D + menu)
 │   ├── AtmScreenLayout.vue  # Wrapper screens (gradient bleu + header + barre fraude)
@@ -42,23 +49,98 @@ src/
 │   ├── InfoModal.vue / PinSettingsModal.vue / StatsModal.vue  # (v-model, z-9500)
 │   ├── chassis/             # AtmChassis, CardReader, PocketZone, BillsTray, ReceiptSlot
 │   ├── draggables/          # DraggableCard, DraggableBills, DraggableReceipt
-│   └── overlays/            # CongratsOverlay, MenuButtons
+│   ├── overlays/            # CongratsOverlay, MenuButtons, IntroOverlay
+│   └── ui/LanguageSwitcher.vue  # switch de langue d'INTERFACE (RouterLink crawlable, variant intro|menu)
 ├── composables/
-│   ├── useAtmState.js       # Routing (singleton module-level)
+│   ├── useAtmState.js       # Navigation INTERNE du DAB (currentScreen, singleton — PAS vue-router)
+│   ├── useAtmLocale.js      # Axe B : atmLocale + atmLocaleChosen + chooseAtmLocale/resetAtmLocale
+│   ├── useAtmI18n.js        # Helper at() — locale du simulateur (axe B)
 │   ├── useSession.js        # État de session (singleton module-level)
 │   ├── useProgression.js    # Persistance sessionStorage
 │   └── useDraggable.js      # Drag & drop factory (Pointer Events API)
-├── screens/                 # 10 écrans — ScreenAccueil … ScreenStats
+├── screens/                 # écrans — ScreenAccueil … ScreenCarteBloquee
 └── utils/sounds.js          # playApplause() — Web Audio API
 ```
 
-### Routing
+### Routing — DEUX systèmes distincts
 
-Pas de Vue Router. `useAtmState.js` expose `currentScreen` et `navigate(screenName)`. `App.vue` résout le nom via registre statique + `computed`. **Mettre à jour `VALID_SCREENS` (useAtmState.js) ET le registre d'`App.vue` à l'ajout d'un screen.**
+1. **vue-router (interface, axe A)** : 2 routes statiques `/` (fr) et `/en` (en) rendant la
+   MÊME `HomePage.vue`. Sert UNIQUEMENT à l'i18n d'interface + au pré-rendu SSG. `App.vue` =
+   `<RouterView/>`. La locale est pilotée par `route.meta.locale` via `router.beforeEach`
+   (cf. `main.js`). **Ne PAS y ajouter de logique métier ni de routes dynamiques.**
+2. **Navigation INTERNE du DAB** : `useAtmState.js` expose `currentScreen` et `navigate(screenName)` ;
+   `HomePage.vue` résout le nom via registre statique + `computed`. **Mettre à jour `VALID_SCREENS`
+   (useAtmState.js) ET le registre de `HomePage.vue` à l'ajout d'un screen.** Ce n'est PAS vue-router.
+
+L'état du DAB (singletons module-level : useAtmState, useSession, useAtmObjects) **persiste au switch
+d'interface** — il vit hors du cycle de vie des composants.
 
 ### État partagé (module-level singletons)
 
 Tous les composables déclarent leurs refs **en dehors** de la fonction exportée. Chaque appel à `useSession()` etc. retourne les mêmes refs.
+
+---
+
+## i18n — DOUBLE axe de langue + SSG
+
+Deux URLs pré-rendues et indexables : `/atm-trainer/` (fr, x-default) et `/atm-trainer/en/` (en).
+**Deux axes de langue INDÉPENDANTS :**
+
+| Axe | Quoi | Piloté par | Accès dans le code |
+|---|---|---|---|
+| **A — interface** (`appLocale`) | menus, popup d'accueil, modales, `<head>` SEO | la route (`/` vs `/en/`) | `useI18n().t()` + `locale` |
+| **B — simulateur** (`atmLocale`) | l'écran bleu du DAB : screens, châssis, clavier, reçu | `ScreenLangue` (dans la simu) | `useAtmI18n().at()` |
+
+On peut avoir l'interface en FR et simuler un DAB en EN (ou l'inverse). **Une seule instance vue-i18n.**
+
+### Axe B — `at()` et la sémantique d'`atmLocale`
+
+`useAtmI18n().at(key, named)` = `t(key, named, { locale: atmLocaleChosen ? atmLocale.value : locale.value })`.
+- Tant qu'aucune langue n'a été choisie dans ScreenLangue → le simulateur **suit la langue d'interface**
+  (`locale`, composer per-app → **SSG-safe**).
+- Un choix dans ScreenLangue (`chooseAtmLocale(code)`) fixe `atmLocale` → indépendant ; le switch
+  d'interface ne le modifie plus.
+- `resetSession()` (retour Accueil / fin de flux) appelle `resetAtmLocale()` → efface le choix → re-suit l'interface.
+- ⚠️ **Ne JAMAIS lire le ref module `atmLocale` pendant le rendu SSG** : vite-ssg rend les routes
+  **en parallèle** (p-queue) → un ref module mutable partagé fuit entre pages. C'est pourquoi `at()`
+  dérive de la locale per-app tant qu'aucun choix n'est fait (toujours le cas au build).
+
+### Règle de classement des chaînes
+
+- **`at('atm.*')`** = tout ce que l'apprenant lit comme partie du DAB : `screens/*`, `AtmScreenLayout`
+  (en-tête « MA BANQUE »→« MY BANK », barre VIGILANCE FRAUDE), `AtmKeypad`, libellés de fentes du
+  châssis (`PocketZone`, `CardReader`, `BillsTray`, `ReceiptSlot`), 3 lignes lisibles du `DraggableReceipt`.
+- **`t('*')`** = interface : `MenuButtons`, `IntroOverlay`/`ProjectInfo`, modales, `CongratsOverlay`,
+  `LanguageSwitcher`, et tout le `<head>` SEO.
+- **FIXE (non traduit)** : marques SVG (« ADAPT BANK », « BANQUE ADAPT », « UTILISATEUR ADAPT »),
+  texte du billet € (BCE/ECB/EURO), dates, IDs (« DAB 75001-PARIS »), URL, n° de série. Autonymes
+  de langue de ScreenLangue (« Français », « English », « Brezhoneg »).
+
+### ScreenLangue (axe B)
+
+Liste construite dynamiquement (`v-for`, pas de markup dupliqué). **English ACTIF** (`chooseAtmLocale('en')`
+puis `navigate('ScreenOperation')`). **Brezhoneg toujours en dernier et grisé** (`disabled`). **Ordre des
+options selon l'interface** : `appLocale==='en'` → [English, Français, Brezhoneg] ; sinon → [Français,
+English, Brezhoneg]. Libellés = autonymes non traduits ; titre via `at('atm.langue.title')`.
+
+### SEO par locale (`HomePage.vue` → `useHead`)
+
+`useHead(() => …)` réactif à `locale.value` : `htmlAttrs.lang`, title/description/keywords, canonical +
+hreflang fr/en/x-default (x-default=FR), OG/Twitter, JSON-LD `WebApplication` **construit depuis les
+mêmes clés i18n que le visible**. `index.html` = head AGNOSTIQUE uniquement (charset, viewport,
+icônes, manifest, script anti-flash). `public/sitemap.xml` = 2 URLs hreflang réciproques ;
+`public/404.html` = page GitHub Pages.
+
+### Pièges i18n (à respecter)
+
+1. **`@unhead/vue` épinglé `^2.x`** — v3 → 2 instances head distinctes, rien injecté au pré-rendu.
+   C'est le `useHead` PAR LOCALE qui fixe `htmlAttrs.lang` (résout l'ancien bug « unhead forçait lang=en »).
+2. **vue-i18n bundlé SSR** : `ssr.noExternal: ["vue-i18n"]` + flags Vue dans `define` (vite.config.js).
+3. **i18n créé PAR APP** (`createAppI18n`), jamais singleton → sinon fuite de locale entre pages.
+4. **Aucun caractère `|`** dans une valeur i18n (séparateur de pluriel vue-i18n). Utiliser « — » / « / » / « : ».
+5. **H1 unique par page** = titre de `ProjectInfo` (popup ouverte au build). Les titres d'écran sont des `<p>`.
+6. Popup d'accueil préservée OUVERTE au build (`visible = typeof window==='undefined' || localStorage…`).
+7. Listes i18n (tableaux) : `tm()` + `rt()`. fr = source de vérité.
 
 ---
 
