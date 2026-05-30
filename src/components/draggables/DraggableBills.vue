@@ -43,6 +43,39 @@ function billBgColor(denom) {
   return "#D43030";
 }
 
+// Visual stacking offset: every bill under the top one is shifted down and to
+// the right so it reads as several bills rather than a single note. STEP_X/Y are
+// in viewBox units; billsViewBox grows by the same amount so the steps stay
+// visible without clipping — the SVG keeps its fixed on-screen size, so the
+// perceived footprint does not change.
+const STEP_X = 24;
+const STEP_Y = 26; // bigger than STEP_X*690/1290 → steps drop more vertically
+const MAX_LAYERS = 4; // stacking more steps than this adds nothing readable
+
+const backLayers = computed(() => {
+  const breakdown = billsBreakdown.value;
+  const count = Math.min(breakdown.length - 1, MAX_LAYERS);
+  const layers = [];
+  // From the deepest (drawn first) up to the one just behind the top bill.
+  for (let i = count; i >= 1; i--) {
+    layers.push({ color: billBgColor(breakdown[i]), dx: i * STEP_X, dy: i * STEP_Y });
+  }
+  return layers;
+});
+
+const billsViewBox = computed(() => {
+  const count = Math.min(billsBreakdown.value.length - 1, MAX_LAYERS);
+  const RATIO = 1290 / 690;
+  // Bounding box of the fanned stack: front bill 1270×670 + 20u padding, plus
+  // the deepest step offset. Grow the viewBox to fit it while keeping the bill
+  // aspect ratio (so the SVG never letterboxes nor clips the lowest step).
+  const neededW = 1290 + count * STEP_X;
+  const neededH = 690 + count * STEP_Y;
+  const w = Math.max(neededW, Math.round(neededH * RATIO));
+  const h = Math.round(w / RATIO);
+  return `0 0 ${w} ${h}`;
+});
+
 const gradId = computed(() => props.portrait ? "db-pt-grad" : "db-ls-grad");
 
 const handleDown   = (e) => props.doDown?.(e);
@@ -60,7 +93,7 @@ const handleCancel = (e) => props.doCancel?.(e);
     @pointerup="handleUp"
     @pointercancel="handleCancel"
   >
-    <svg viewBox="0 0 1290 690" xmlns="http://www.w3.org/2000/svg"
+    <svg :viewBox="billsViewBox" xmlns="http://www.w3.org/2000/svg"
          style="width:var(--bills-w); height:var(--bills-h); display:block; filter:drop-shadow(0 4px 12px rgba(0,0,0,0.65));">
       <defs>
         <linearGradient :id="gradId" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
@@ -68,10 +101,10 @@ const handleCancel = (e) => props.doCancel?.(e);
           <stop offset="100%" :stop-color="billsBreakdown[0] === 50 ? '#C86808' : billsBreakdown[0] === 20 ? '#1448B0' : '#AA1414'"/>
         </linearGradient>
       </defs>
-      <rect v-if="billsBreakdown.length >= 3" x="20" y="20" width="1270" height="670" rx="12" :fill="billBgColor(billsBreakdown[2])" opacity="0.85"/>
-      <rect v-if="billsBreakdown.length >= 3" x="20" y="20" width="1270" height="670" rx="12" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="6"/>
-      <rect v-if="billsBreakdown.length >= 2" x="10" y="10" width="1270" height="670" rx="12" :fill="billBgColor(billsBreakdown[1])" opacity="0.9"/>
-      <rect v-if="billsBreakdown.length >= 2" x="10" y="10" width="1270" height="670" rx="12" fill="none" stroke="rgba(0,0,0,0.25)" stroke-width="5"/>
+      <rect v-for="(layer, idx) in backLayers" :key="idx"
+            :x="layer.dx" :y="layer.dy" width="1270" height="670" rx="12"
+            :fill="layer.color" opacity="0.9"
+            stroke="rgba(0,0,0,0.3)" stroke-width="6"/>
       <g v-if="billsBreakdown.length > 0">
         <rect width="1270" height="670" rx="12" :fill="`url(#${gradId})`"/>
         <rect width="370" height="670" rx="12" fill="rgba(0,0,0,0.13)"/>

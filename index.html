@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-site-verification" content="ZFL_Uz5FNhczyHJl4xXeef_O3Hp7MQX5KLSTqeT2_Lc" />
 
-    <title>DAB Trainer — Simulateur de distributeur de billets pour l'apprentissage de l'autonomie</title>
-    <meta name="description" content="Simulateur de DAB gratuit pour aider les personnes en situation de handicap cognitif à s'entraîner au retrait d'argent. Outil pédagogique pour ESAT, IME, SAVS et éducateurs spécialisés." />
+    <!-- Anti-flash : masque la popup d'accueil avant le 1er paint si déjà vue (cf. IntroOverlay.vue). -->
+    <script>try{if(localStorage.getItem("atm-trainer-intro-seen")==="1")document.documentElement.setAttribute("data-intro-seen","");}catch(e){}</script>
+
+    <!-- title, description, keywords, canonical, hreflang, OG/Twitter et JSON-LD
+         sont émis par locale via useHead (cf. src/pages/HomePage.vue). -->
     <meta name="author" content="Cédric Ruiu" />
-    <meta name="keywords" content="simulateur DAB, distributeur automatique billets, handicap cognitif, ESAT, IME, SAVS, autonomie financière, outil pédagogique, apprentissage retrait argent, accessibilité, médico-social" />
     <meta name="theme-color" content="#1e3a8a" />
-    <link rel="canonical" href="https://cedric-ruiu.github.io/atm-trainer/" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
 
     <link rel="icon" type="image/png" href="/atm-trainer/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/atm-trainer/favicon.svg" />
@@ -18,60 +20,12 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/atm-trainer/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="DAB Trainer" />
     <link rel="manifest" href="/atm-trainer/site.webmanifest" />
-
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="DAB Trainer" />
-    <meta property="og:title" content="DAB Trainer — Simulateur de distributeur de billets" />
-    <meta property="og:description" content="Simulateur de DAB gratuit et open source pour l'apprentissage de l'autonomie financière des personnes en situation de handicap cognitif." />
-    <meta property="og:url" content="https://cedric-ruiu.github.io/atm-trainer/" />
-    <meta property="og:image" content="https://cedric-ruiu.github.io/atm-trainer/dab-trainer-og-image.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="fr_FR" />
-    <meta property="og:locale:alternate" content="en_US" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="DAB Trainer — Simulateur de distributeur de billets" />
-    <meta name="twitter:description" content="Simulateur de DAB gratuit et open source pour l'apprentissage de l'autonomie financière des personnes en situation de handicap cognitif." />
-    <meta name="twitter:image" content="https://cedric-ruiu.github.io/atm-trainer/dab-trainer-og-image.png" />
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "DAB Trainer",
-      "alternateName": "ATM Trainer",
-      "description": "Simulateur de distributeur automatique de billets conçu pour aider les personnes en situation de handicap cognitif à s'entraîner au retrait d'argent.",
-      "url": "https://cedric-ruiu.github.io/atm-trainer/",
-      "applicationCategory": "EducationalApplication",
-      "operatingSystem": "Web",
-      "browserRequirements": "Requires JavaScript. Modern browser.",
-      "inLanguage": ["fr", "en"],
-      "isAccessibleForFree": true,
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "EUR"
-      },
-      "audience": {
-        "@type": "PeopleAudience",
-        "audienceType": "Personnes en situation de handicap cognitif, professionnels du médico-social (ESAT, IME, SAVS), éducateurs spécialisés"
-      },
-      "creator": {
-        "@type": "Person",
-        "name": "Cédric Ruiu",
-        "url": "https://github.com/Cedric-ruiu"
-      },
-      "license": "https://opensource.org/licenses/MIT",
-      "codeRepository": "https://github.com/Cedric-ruiu/atm-trainer"
-    }
-    </script>
   </head>
   <body>
     <div id="app"></div>
     <noscript>
       <div style="max-width:720px;margin:2rem auto;padding:1.5rem;font-family:system-ui,sans-serif;color:#1e293b;">
-        <h1>DAB Trainer — Simulateur de distributeur automatique de billets</h1>
+        <p style="font-size:1.5rem;font-weight:700;margin:0 0 .75rem;">DAB Trainer — Simulateur de distributeur automatique de billets</p>
         <p><strong>DAB Trainer</strong> est un simulateur de distributeur automatique de billets gratuit et open source, conçu pour aider les personnes en situation de handicap cognitif à s'entraîner au retrait d'argent en autonomie.</p>
         <p>L'application reproduit fidèlement les étapes d'un retrait : insertion de la carte, saisie du code PIN, récupération des billets et du reçu. Elle s'adresse aux professionnels du médico-social (ESAT, IME, SAVS, éducateurs spécialisés) ainsi qu'aux familles accompagnant un proche.</p>
         <p>Cette application nécessite JavaScript pour fonctionner. Veuillez l'activer dans votre navigateur.</p>

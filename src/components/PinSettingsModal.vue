@@ -1,10 +1,13 @@
 <script setup>
 import { computed, ref, watch } from "vue";
+import { useI18n } from "vue-i18n";
 import { useProgression } from "../composables/useProgression.js";
 import { useSession } from "../composables/useSession.js";
 
 const props = defineProps({ modelValue: Boolean });
 const emit = defineEmits(["update:modelValue"]);
+
+const { t } = useI18n();
 
 const { currentUser, solde } = useSession();
 const { generatePin, loadUser, saveUser } = useProgression();
@@ -43,9 +46,9 @@ function adjustSolde(delta) {
 const hasPin = computed(() => !!currentUser.value?.pin);
 
 const modes = [
-  { key: "manual", label: "Rentrer un code" },
-  { key: "generated", label: "Générer un code" },
-  { key: "demo", label: "Aucun code" },
+  { key: "manual", labelKey: "pin.modeManual" },
+  { key: "generated", labelKey: "pin.modeGenerated" },
+  { key: "demo", labelKey: "pin.modeDemo" },
 ];
 
 watch(
@@ -120,12 +123,12 @@ function clearPin() {
       >
         <button
           class="btn absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-colors text-lg font-light"
-          aria-label="Fermer"
+          :aria-label="t('intro.close')"
           @click="emit('update:modelValue', false)"
         >×</button>
 
         <div class="p-6">
-          <p class="text-xs font-bold tracking-widest uppercase text-yellow-400 mb-4">Paramètres du code</p>
+          <p class="text-xs font-bold tracking-widest uppercase text-yellow-400 mb-4">{{ t("pin.title") }}</p>
 
           <!-- Mode selector -->
           <div class="flex gap-2 mb-4">
@@ -137,7 +140,7 @@ function clearPin() {
                 ? 'background: rgba(0,180,200,0.22); border-color: rgba(0,180,200,0.7); color: white;'
                 : 'background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.55);'"
               @click="selectMode(m.key)"
-            >{{ m.label }}</button>
+            >{{ t(m.labelKey) }}</button>
           </div>
 
           <!-- PIN display — visible dès qu'un code est défini, quel que soit le mode -->
@@ -146,7 +149,7 @@ function clearPin() {
               class="btn px-3 py-1.5 rounded-lg text-xs font-bold transition-colors border shrink-0"
               style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.7);"
               @click="showPin = !showPin"
-            >{{ showPin ? 'Cacher' : 'Voir le code' }}</button>
+            >{{ showPin ? t("pin.hide") : t("pin.show") }}</button>
             <div class="flex gap-3">
               <span
                 v-for="i in 4"
@@ -196,17 +199,17 @@ function clearPin() {
               class="btn px-6 py-2 rounded-lg text-sm font-bold text-white"
               style="background: rgba(0,180,200,0.3); border: 1px solid rgba(0,180,200,0.6);"
               @click="confirmManual"
-            >Valider</button>
+            >{{ t("pin.valider") }}</button>
           </div>
 
           <!-- Sub-panel: generated (code affiché dans la section commune ci-dessus) -->
           <div v-else-if="mode === 'generated'" class="mb-4 py-1">
-            <p class="text-xs text-white/40 text-center">Code généré automatiquement</p>
+            <p class="text-xs text-white/40 text-center">{{ t("pin.generatedHint") }}</p>
           </div>
 
           <!-- Sub-panel: demo -->
           <div v-else class="mb-4 py-1">
-            <p class="text-xs text-white/50 text-center">Tout code à 4 chiffres sera accepté</p>
+            <p class="text-xs text-white/50 text-center">{{ t("pin.demoHint") }}</p>
           </div>
 
           <!-- Clear button -->
@@ -214,11 +217,11 @@ function clearPin() {
             class="btn w-full px-4 py-2.5 rounded-lg text-xs font-bold tracking-wide border text-center mb-2"
             style="background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.12); color: rgba(255,255,255,0.45);"
             @click="clearPin"
-          >Effacer le code en cours ↺</button>
+          >{{ t("pin.clearBtn") }}</button>
 
           <!-- Solde section -->
           <div class="mt-4 pt-4" style="border-top: 1px solid rgba(255,255,255,0.1);">
-            <p class="text-xs font-bold tracking-widest uppercase text-yellow-400 mb-3">Solde du compte</p>
+            <p class="text-xs font-bold tracking-widest uppercase text-yellow-400 mb-3">{{ t("pin.soldeTitle") }}</p>
 
             <!-- Quick amount buttons -->
             <div class="flex gap-2 mb-3">
@@ -267,7 +270,7 @@ function clearPin() {
               class="btn w-full px-4 py-2 rounded-lg text-xs font-bold tracking-wide border text-center"
               style="background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.12); color: rgba(255,255,255,0.45);"
               @click="setSolde(DEFAULT_SOLDE)"
-            >Réinitialiser le solde ({{ DEFAULT_SOLDE }} €) ↺</button>
+            >{{ t("pin.soldeReset", { n: DEFAULT_SOLDE }) }}</button>
           </div>
         </div>
       </div>

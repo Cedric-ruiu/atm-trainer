@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+/* Anti-flash : masque la popup d'accueil avant le 1er paint pour le visiteur
+   récurrent. L'attribut est posé par le script inline du <head> et retiré après
+   hydratation (cf. IntroOverlay.vue). */
+[data-intro-seen] .atm-intro-overlay {
+  display: none;
+}
+
 /* ── Draggable object dimensions — vmin base (iOS 15+), cqi enhancement ─── */
 :root {
   --card-w:    clamp(70px, 12vmin, 130px);

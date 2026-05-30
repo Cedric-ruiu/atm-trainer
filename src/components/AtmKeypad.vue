@@ -1,5 +1,9 @@
 <script setup>
+import { useAtmI18n } from "../composables/useAtmI18n.js";
+
 const emit = defineEmits(["digit", "cancel", "clear", "confirm"]);
+
+const { at } = useAtmI18n();
 </script>
 
 <template>
@@ -10,7 +14,7 @@ const emit = defineEmits(["digit", "cancel", "clear", "confirm"]);
     <button class="atm-key atm-key--digit" @click="emit('digit', '3')">3</button>
     <button class="atm-key atm-key--action atm-key--annulation" @click="emit('cancel')">
       <span class="atm-key__stripe atm-key__stripe--red" />
-      Annulation
+      {{ at("atm.keypad.cancel") }}
     </button>
 
     <!-- Row 2 -->
@@ -19,7 +23,7 @@ const emit = defineEmits(["digit", "cancel", "clear", "confirm"]);
     <button class="atm-key atm-key--digit" @click="emit('digit', '6')">6</button>
     <button class="atm-key atm-key--action atm-key--correction" @click="emit('clear')">
       <span class="atm-key__stripe atm-key__stripe--amber" />
-      Correction
+      {{ at("atm.keypad.correction") }}
     </button>
 
     <!-- Row 3 -->
@@ -34,7 +38,7 @@ const emit = defineEmits(["digit", "cancel", "clear", "confirm"]);
     <div class="atm-key atm-key--dead" />
     <button class="atm-key atm-key--action atm-key--validation" @click="emit('confirm')">
       <span class="atm-key__stripe atm-key__stripe--green" />
-      Validation
+      {{ at("atm.keypad.validation") }}
     </button>
   </div>
 </template>

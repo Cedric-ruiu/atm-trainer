@@ -1,9 +1,12 @@
 <script setup>
+import { useAtmI18n } from "../../composables/useAtmI18n.js";
 import DraggableCard from "../draggables/DraggableCard.vue";
+
+const { at } = useAtmI18n();
 
 const props = defineProps({
   portrait: Boolean,
-  setPocketEl: Function,  // function ref: called with the drop zone DOM element on mount/unmount
+  setPocketEl: Function, // function ref: called with the drop zone DOM element on mount/unmount
   cardVisible: Boolean,
   cardInReader: Boolean,
   swallowing: Boolean,
@@ -32,8 +35,8 @@ const props = defineProps({
         <circle cx="16" cy="20" r="1" fill="#c8a060" opacity="0.6"/>
       </svg>
       <div>
-        <div style="font-size:11px; font-weight:800; letter-spacing:2.5px; text-transform:uppercase; color:#c8a060; line-height:1.2;">Votre poche</div>
-        <div style="font-size:9px; color:rgba(200,160,80,0.55); line-height:1.4; margin-top:1px;">Glissez vos affaires ici</div>
+        <div style="font-size:11px; font-weight:800; letter-spacing:2.5px; text-transform:uppercase; color:#c8a060; line-height:1.2;">{{ at("atm.chassis.pocketTitle") }}</div>
+        <div style="font-size:9px; color:rgba(200,160,80,0.55); line-height:1.4; margin-top:1px;">{{ at("atm.chassis.pocketHint") }}</div>
       </div>
     </div>
     <div :ref="setPocketEl"
@@ -44,7 +47,7 @@ const props = defineProps({
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style="opacity:0.3;">
           <path d="M16 6v16M8 14l8 8 8-8" stroke="#c8a060" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <span style="font-size:8px; color:rgba(200,150,60,0.35); text-transform:uppercase; letter-spacing:1.5px; text-align:center; line-height:1.6;">glissez<br>ici</span>
+        <span style="font-size:8px; color:rgba(200,150,60,0.35); text-transform:uppercase; letter-spacing:1.5px; text-align:center; line-height:1.6;">{{ at("atm.chassis.dragHere1") }}<br>{{ at("atm.chassis.dragHere2") }}</span>
       </div>
       <div style="width: var(--card-w); height: var(--card-h);">
         <DraggableCard
@@ -72,8 +75,8 @@ const props = defineProps({
         <circle cx="16" cy="20" r="1" fill="#c8a060" opacity="0.6"/>
       </svg>
       <div>
-        <div style="font-size:10px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:#c8a060; line-height:1.2;">Votre poche</div>
-        <div style="font-size:8px; color:rgba(200,160,80,0.55); line-height:1.4; margin-top:1px;">Glissez vos affaires ici</div>
+        <div style="font-size:10px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:#c8a060; line-height:1.2;">{{ at("atm.chassis.pocketTitle") }}</div>
+        <div style="font-size:8px; color:rgba(200,160,80,0.55); line-height:1.4; margin-top:1px;">{{ at("atm.chassis.pocketHint") }}</div>
       </div>
     </div>
     <div :ref="setPocketEl"
@@ -84,7 +87,7 @@ const props = defineProps({
         <svg width="24" height="24" viewBox="0 0 32 32" fill="none" style="opacity:0.3;">
           <path d="M16 6v16M8 14l8 8 8-8" stroke="#c8a060" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <span style="font-size:7px; color:rgba(200,150,60,0.35); text-transform:uppercase; letter-spacing:1px; text-align:center; line-height:1.6;">glissez<br>ici</span>
+        <span style="font-size:7px; color:rgba(200,150,60,0.35); text-transform:uppercase; letter-spacing:1px; text-align:center; line-height:1.6;">{{ at("atm.chassis.dragHere1") }}<br>{{ at("atm.chassis.dragHere2") }}</span>
       </div>
       <div style="width: var(--card-w); height: var(--card-h);">
         <DraggableCard

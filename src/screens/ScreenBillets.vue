@@ -1,12 +1,14 @@
 <script setup>
 import { inject, onMounted } from "vue";
 import AtmScreenLayout from "../components/AtmScreenLayout.vue";
+import { useAtmI18n } from "../composables/useAtmI18n.js";
 import { useAtmState } from "../composables/useAtmState.js";
 import { useProgression } from "../composables/useProgression.js";
 import { useSession } from "../composables/useSession.js";
 
+const { at } = useAtmI18n();
 const { navigate } = useAtmState();
-const { currentUser } = useSession();
+const { currentUser, selectedAmount } = useSession();
 const { loadUser, recordSession } = useProgression();
 
 const billsVisible = inject("billsVisible");
@@ -55,14 +57,14 @@ onMounted(() => {
 
         <!-- Droite : texte -->
         <div class="flex-1 flex flex-col gap-3 pl-4">
-          <h1 class="text-xl font-black tracking-widest uppercase leading-tight" style="color: #f0c040">
-            VEUILLEZ PRENDRE VOS BILLETS
-          </h1>
+          <p class="text-xl font-black tracking-widest uppercase leading-tight" style="color: #f0c040">
+            {{ at("atm.billets.title") }}
+          </p>
           <p class="text-3xl font-bold font-mono text-white">
             {{ selectedAmount }} €
           </p>
           <p class="text-white/60 text-sm">
-            Glissez vos billets vers la zone poche
+            {{ at("atm.billets.drag") }}
           </p>
         </div>
 

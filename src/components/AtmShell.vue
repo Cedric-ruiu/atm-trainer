@@ -193,7 +193,7 @@ watch(billsVisible, (visible) => {
 </script>
 
 <template>
-  <div class="min-h-dvh bg-[#2a2e33] flex items-center justify-center p-3">
+  <main class="min-h-dvh bg-[#2a2e33] flex items-center justify-center p-3">
 
     <MenuButtons />
 
@@ -261,7 +261,7 @@ watch(billsVisible, (visible) => {
     </AtmChassis>
 
     <CongratsOverlay />
-  </div>
+  </main>
 </template>
 
 <style scoped>

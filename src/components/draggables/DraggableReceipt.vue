@@ -1,6 +1,9 @@
 <script setup>
 import { computed } from "vue";
+import { useAtmI18n } from "../../composables/useAtmI18n.js";
 import { useSession } from "../../composables/useSession.js";
+
+const { at } = useAtmI18n();
 
 const props = defineProps({
   portrait: Boolean,
@@ -26,9 +29,9 @@ const btnStyle = computed(() => {
   return `position:absolute; top:0; left:0; width:var(--receipt-w); height:var(--receipt-h); cursor:grab;`;
 });
 
-const handleDown   = (e) => props.doDown?.(e);
-const handleMove   = (e) => props.doMove?.(e);
-const handleUp     = (e) => props.doUp?.(e);
+const handleDown = (e) => props.doDown?.(e);
+const handleMove = (e) => props.doMove?.(e);
+const handleUp = (e) => props.doUp?.(e);
 const handleCancel = (e) => props.doCancel?.(e);
 </script>
 
@@ -53,13 +56,13 @@ const handleCancel = (e) => props.doCancel?.(e);
       <text x="40" y="128" font-family="monospace" font-size="27" fill="#555">11/04/2026  14:32</text>
       <text x="40" y="162" font-family="monospace" font-size="27" fill="#555">DAB 75001-PARIS</text>
       <line x1="40" y1="184" x2="480" y2="184" stroke="#bbb" stroke-width="1" stroke-dasharray="8 5"/>
-      <text x="40" y="226" font-family="monospace" font-size="34" font-weight="700" fill="#222">RETRAIT DAB</text>
+      <text x="40" y="226" font-family="monospace" font-size="34" font-weight="700" fill="#222">{{ at("atm.receipt.withdrawal") }}</text>
       <text x="260" y="314" text-anchor="middle" font-family="monospace" font-size="84" font-weight="900" fill="#111">{{ selectedAmount || 0 }} €</text>
       <line x1="40" y1="342" x2="480" y2="342" stroke="#bbb" stroke-width="1" stroke-dasharray="8 5"/>
-      <text x="40"  y="378" font-family="monospace" font-size="26" fill="#666">Solde disponible :</text>
+      <text x="40"  y="378" font-family="monospace" font-size="26" fill="#666">{{ at("atm.receipt.balance") }}</text>
       <text x="480" y="378" text-anchor="end" font-family="monospace" font-size="28" font-weight="700" fill="#333">{{ solde }} €</text>
       <line x1="40" y1="400" x2="480" y2="400" stroke="#ccc" stroke-width="2"/>
-      <text x="260" y="444" text-anchor="middle" font-family="monospace" font-size="28" fill="#888">Merci de votre visite</text>
+      <text x="260" y="444" text-anchor="middle" font-family="monospace" font-size="28" fill="#888">{{ at("atm.receipt.thanks") }}</text>
       <text x="260" y="478" text-anchor="middle" font-family="monospace" font-size="23" fill="#aaa">banque-adapt.fr</text>
       <g transform="translate(75, 510)">
         <rect x="0"   width="6"  height="72" fill="#1a1a1a"/><rect x="11"  width="12" height="72" fill="#1a1a1a"/>

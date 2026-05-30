@@ -1,9 +1,11 @@
 <script setup>
 import { inject, ref, watch } from "vue";
 import AtmScreenLayout from "../components/AtmScreenLayout.vue";
+import { useAtmI18n } from "../composables/useAtmI18n.js";
 import { useAtmState } from "../composables/useAtmState.js";
 import { useSession } from "../composables/useSession.js";
 
+const { at } = useAtmI18n();
 const { navigate } = useAtmState();
 const { setSelectedAmount, setTransactionType, solde } = useSession();
 
@@ -44,15 +46,15 @@ function onCustomClear() {
 function onCustomConfirm() {
   const amount = Number(customDigits.value.join(""));
   if (!amount || amount <= 0) {
-    customError.value = "Montant invalide";
+    customError.value = at("atm.montant.errInvalid");
     return;
   }
   if (amount % 10 !== 0) {
-    customError.value = "Montant invalide — multiple de 10 € requis";
+    customError.value = at("atm.montant.errMultiple");
     return;
   }
   if (amount > solde.value) {
-    customError.value = "Provision insuffisante";
+    customError.value = at("atm.montant.errInsufficient");
     return;
   }
   setSelectedAmount(amount);
@@ -84,9 +86,9 @@ watch(keypadBus, (event) => {
 
       <!-- Choix du montant -->
       <template v-if="step === 'amounts'">
-        <h1 class="text-xl font-black tracking-widest uppercase text-white text-center">
-          QUEL MONTANT SOUHAITEZ-VOUS ?
-        </h1>
+        <p class="text-xl font-black tracking-widest uppercase text-white text-center">
+          {{ at("atm.montant.title") }}
+        </p>
         <div class="grid grid-cols-3 gap-3 w-full max-w-xs">
           <button
             v-for="amount in [10, 20, 30, 50, 100]"
@@ -102,7 +104,7 @@ watch(keypadBus, (event) => {
             style="background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.15)"
             @click="step = 'custom'; customDigits = []; customError = ''"
           >
-            Autre
+            {{ at("atm.montant.other") }}
           </button>
         </div>
         <button
@@ -110,14 +112,14 @@ watch(keypadBus, (event) => {
           style="background: rgba(220,50,50,0.2); border-color: rgba(220,50,50,0.45)"
           @click="step = 'cancel'"
         >
-          Annuler
+          {{ at("atm.common.cancel") }}
         </button>
       </template>
 
       <!-- Confirmation -->
       <template v-else-if="step === 'confirm'">
         <p class="text-white/80 text-base text-center uppercase tracking-widest">
-          Confirmez-vous ce montant ?
+          {{ at("atm.montant.confirmQuestion") }}
         </p>
         <p class="text-4xl font-bold font-mono" style="color: #f0c040">
           {{ pendingAmount }} €
@@ -128,14 +130,14 @@ watch(keypadBus, (event) => {
             style="background: rgba(0,180,200,0.22); border-color: rgba(0,180,200,0.5)"
             @click="confirmAmount"
           >
-            OUI
+            {{ at("atm.common.yes") }}
           </button>
           <button
             class="flex-1 px-6 py-4 rounded-xl text-white text-base font-bold tracking-wide transition-colors border"
             style="background: rgba(220,50,50,0.2); border-color: rgba(220,50,50,0.45)"
             @click="step = 'amounts'"
           >
-            NON
+            {{ at("atm.common.no") }}
           </button>
         </div>
       </template>
@@ -143,7 +145,7 @@ watch(keypadBus, (event) => {
       <!-- Saisie libre -->
       <template v-else-if="step === 'custom'">
         <p class="text-white/80 text-base uppercase tracking-widest text-center">
-          Saisissez le montant
+          {{ at("atm.montant.enterAmount") }}
         </p>
         <div
           class="w-full max-w-xs rounded-xl px-6 py-4 text-center"
@@ -157,17 +159,17 @@ watch(keypadBus, (event) => {
           {{ customError }}
         </p>
         <p class="text-white/50 text-xs tracking-widest uppercase">
-          Utilisez le clavier
+          {{ at("atm.montant.useKeypad") }}
         </p>
       </template>
 
       <!-- Annulation -->
       <template v-else-if="step === 'cancel'">
-        <h1 class="text-xl font-black tracking-widest uppercase text-white text-center">
-          RETIREZ VOTRE CARTE
-        </h1>
+        <p class="text-xl font-black tracking-widest uppercase text-white text-center">
+          {{ at("atm.common.takeCard") }}
+        </p>
         <p class="text-white/60 text-sm text-center">
-          Votre carte est disponible dans le lecteur
+          {{ at("atm.common.cardInReader") }}
         </p>
       </template>
 

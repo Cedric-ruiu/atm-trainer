@@ -1,18 +1,21 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { playApplause } from "../../utils/sounds.js";
+
+const { t } = useI18n();
 
 const showCongrats = ref(false);
 let congratsTimer = null;
 
 const CONFETTI = [
-  { x: 8,  color: "#f0c040", delay: 0    },
+  { x: 8, color: "#f0c040", delay: 0 },
   { x: 18, color: "#00d4a0", delay: 0.15 },
-  { x: 28, color: "#ff6060", delay: 0.3  },
+  { x: 28, color: "#ff6060", delay: 0.3 },
   { x: 38, color: "#00b4c8", delay: 0.05 },
-  { x: 48, color: "#f0c040", delay: 0.2  },
-  { x: 58, color: "#00d4a0", delay: 0.4  },
-  { x: 68, color: "#ff6060", delay: 0.1  },
+  { x: 48, color: "#f0c040", delay: 0.2 },
+  { x: 58, color: "#00d4a0", delay: 0.4 },
+  { x: 68, color: "#ff6060", delay: 0.1 },
   { x: 78, color: "#00b4c8", delay: 0.25 },
   { x: 88, color: "#f0c040", delay: 0.35 },
   { x: 22, color: "#00d4a0", delay: 0.45 },
@@ -23,7 +26,9 @@ const CONFETTI = [
 function openCongrats() {
   showCongrats.value = true;
   playApplause();
-  congratsTimer = setTimeout(() => { showCongrats.value = false; }, 5000);
+  congratsTimer = setTimeout(() => {
+    showCongrats.value = false;
+  }, 5000);
 }
 
 function closeCongrats() {
@@ -31,9 +36,16 @@ function closeCongrats() {
   showCongrats.value = false;
 }
 
-function _onObjectifAtteint() { openCongrats(); }
-onMounted(() => window.addEventListener("atm-objectif-atteint", _onObjectifAtteint));
-onUnmounted(() => { window.removeEventListener("atm-objectif-atteint", _onObjectifAtteint); clearTimeout(congratsTimer); });
+function _onObjectifAtteint() {
+  openCongrats();
+}
+onMounted(() =>
+  window.addEventListener("atm-objectif-atteint", _onObjectifAtteint),
+);
+onUnmounted(() => {
+  window.removeEventListener("atm-objectif-atteint", _onObjectifAtteint);
+  clearTimeout(congratsTimer);
+});
 </script>
 
 <template>
@@ -65,9 +77,9 @@ onUnmounted(() => { window.removeEventListener("atm-objectif-atteint", _onObject
         style="background: rgba(20,26,34,0.95); box-shadow: 0 24px 64px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.08);"
       >
         <p class="text-4xl tracking-widest select-none">★ ★ ★</p>
-        <p class="text-xs font-bold tracking-widest uppercase" style="color:#f0c040;">Objectif atteint !</p>
-        <p class="text-2xl font-black tracking-wide uppercase">Félicitations !</p>
-        <p class="text-sm mt-1" style="color: rgba(255,255,255,0.45);">Appuyez pour continuer</p>
+        <p class="text-xs font-bold tracking-widest uppercase" style="color:#f0c040;">{{ t("congrats.eyebrow") }}</p>
+        <p class="text-2xl font-black tracking-wide uppercase">{{ t("congrats.title") }}</p>
+        <p class="text-sm mt-1" style="color: rgba(255,255,255,0.45);">{{ t("congrats.hint") }}</p>
       </div>
     </div>
   </Transition>

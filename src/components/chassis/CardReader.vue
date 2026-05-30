@@ -1,9 +1,12 @@
 <script setup>
+import { useAtmI18n } from "../../composables/useAtmI18n.js";
 import DraggableCard from "../draggables/DraggableCard.vue";
+
+const { at } = useAtmI18n();
 
 const props = defineProps({
   portrait: Boolean,
-  setSlotEl: Function,  // function ref: called with the slot DOM element on mount/unmount
+  setSlotEl: Function, // function ref: called with the slot DOM element on mount/unmount
   cardVisible: Boolean,
   cardInReader: Boolean,
   swallowing: Boolean,
@@ -32,7 +35,7 @@ const props = defineProps({
                class="relative flex items-center justify-center"
                style="width: var(--card-slot-w); height: 22px; background: #0a0c10; border-radius: 2px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.9), inset 0 0 8px rgba(0,0,0,0.8);">
             <span v-if="!cardInReader" class="text-[7px] tracking-wider uppercase select-none"
-                  style="color: rgba(255,255,255,0.25);">insérer ›</span>
+                  style="color: rgba(255,255,255,0.25);">{{ at("atm.chassis.slotInsert") }}</span>
           </div>
           <div class="w-full mt-1 mb-1"
                style="height: 3px; border-radius: 1px; background: linear-gradient(90deg, transparent 0%, #00e060 20%, #00ff70 50%, #00e060 80%, transparent 100%); box-shadow: 0 0 6px rgba(0,255,80,0.7), 0 0 12px rgba(0,255,80,0.3);" />

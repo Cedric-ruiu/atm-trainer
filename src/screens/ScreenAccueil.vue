@@ -1,8 +1,10 @@
 <script setup>
 import { inject, onMounted } from "vue";
 import AtmScreenLayout from "../components/AtmScreenLayout.vue";
+import { useAtmI18n } from "../composables/useAtmI18n.js";
 import { useAtmState } from "../composables/useAtmState.js";
 
+const { at } = useAtmI18n();
 const { navigate } = useAtmState();
 
 const cardVisible = inject("cardVisible");
@@ -45,11 +47,11 @@ onMounted(() => {
 
         <!-- Droite : texte -->
         <div class="flex-1 flex flex-col gap-4 pl-4">
-          <h1 class="text-xl font-black tracking-widest uppercase text-white leading-tight">
-            INTRODUISEZ<br>VOTRE CARTE
-          </h1>
+          <p class="text-xl font-black tracking-widest uppercase text-white leading-tight">
+            {{ at("atm.accueil.title") }}
+          </p>
           <div>
-            <p class="text-white/70 text-sm">Billets disponibles :</p>
+            <p class="text-white/70 text-sm">{{ at("atm.accueil.billsAvailable") }}</p>
             <p class="font-bold text-base" style="color: #f0c040">10 € – 20 € – 50 €</p>
           </div>
         </div>
