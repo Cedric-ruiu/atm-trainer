@@ -104,5 +104,90 @@
     "eyebrow": "Goal reached!",
     "title": "Congratulations!",
     "hint": "Tap to continue"
+  },
+  "atm": {
+    "common": {
+      "yes": "YES",
+      "no": "NO",
+      "cancel": "Cancel",
+      "takeCard": "TAKE YOUR CARD",
+      "cardInReader": "Your card is available in the reader"
+    },
+    "chassis": {
+      "bankTop": "MY",
+      "bankMain": "BANK",
+      "fraudBadge": "FRAUD ALERT",
+      "fraudText": "Protect your PIN while entering it",
+      "pocketTitle": "Your pocket",
+      "pocketHint": "Drag your belongings here",
+      "dragHere1": "drag",
+      "dragHere2": "here",
+      "slotInsert": "insert ›",
+      "slotBills": "bills",
+      "slotReceipt": "receipt"
+    },
+    "keypad": {
+      "cancel": "Cancel",
+      "correction": "Correct",
+      "validation": "Confirm"
+    },
+    "accueil": {
+      "title": "INSERT YOUR CARD",
+      "billsAvailable": "Available bills:"
+    },
+    "langue": {
+      "title": "CHOOSE YOUR LANGUAGE"
+    },
+    "operation": {
+      "title": "CHOOSE YOUR OPERATION",
+      "balanceLabel": "Available balance",
+      "express": "Express withdrawal {amount} €",
+      "otherAmount": "Other amount",
+      "checkBalance": "Check balance"
+    },
+    "montant": {
+      "title": "HOW MUCH WOULD YOU LIKE?",
+      "other": "Other",
+      "confirmQuestion": "Confirm this amount?",
+      "enterAmount": "Enter the amount",
+      "useKeypad": "Use the keypad",
+      "errInvalid": "Invalid amount",
+      "errMultiple": "Invalid amount — must be a multiple of 10 €",
+      "errInsufficient": "Insufficient funds"
+    },
+    "code": {
+      "requested": "You requested {amount} €",
+      "title": "ENTER YOUR PIN",
+      "discreet": "away from prying eyes",
+      "thenConfirm": "THEN CONFIRM",
+      "wrongPin": "Incorrect code — {n} attempt(s) remaining"
+    },
+    "recu": {
+      "question": "WOULD YOU LIKE A RECEIPT?",
+      "takeBoth": "TAKE BACK YOUR CARD AND RECEIPT",
+      "dragBoth": "Drag your card then your receipt to your pocket",
+      "cardLabel": "Card",
+      "cardTaken": "✓ Collected",
+      "receiptLabel": "Receipt",
+      "receiptTaken": "✓ Collected"
+    },
+    "billets": {
+      "title": "PLEASE TAKE YOUR CASH",
+      "drag": "Drag your cash to your pocket"
+    },
+    "remerciement": {
+      "thanks": "THANK YOU FOR YOUR VISIT",
+      "goodbye": "Goodbye"
+    },
+    "carteBloquee": {
+      "title": "CARD BLOCKED",
+      "instruction": "Please go to a bank counter",
+      "farewell": "Thank you for your visit"
+    },
+    "receipt": {
+      "withdrawal": "ATM WITHDRAWAL",
+      "balance": "Available balance:",
+      "thanks": "Thank you for your visit"
+    }
   }
 }

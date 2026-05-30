@@ -1,9 +1,11 @@
 <script setup>
 import { inject, ref, watch } from "vue";
 import AtmScreenLayout from "../components/AtmScreenLayout.vue";
+import { useAtmI18n } from "../composables/useAtmI18n.js";
 import { useAtmState } from "../composables/useAtmState.js";
 import { useSession } from "../composables/useSession.js";
 
+const { at } = useAtmI18n();
 const { navigate } = useAtmState();
 const { currentUser, deductAmount, pinAttempts, selectedAmount } = useSession();
 
@@ -44,7 +46,9 @@ function onConfirm() {
     if (pinAttempts.value >= 3) {
       navigate("ScreenCarteBloquee");
     } else {
-      errorMessage.value = `Code incorrect — ${3 - pinAttempts.value} tentative(s) restante(s)`;
+      errorMessage.value = at("atm.code.wrongPin", {
+        n: 3 - pinAttempts.value,
+      });
     }
   }
 }
@@ -104,16 +108,16 @@ watch(keypadBus, (event) => {
         <!-- Droite : instructions -->
         <div class="flex-1 flex flex-col gap-3 pl-4">
           <p v-if="selectedAmount" class="text-sm font-bold" style="color: #f0c040">
-            Vous avez demandé {{ selectedAmount }} €
+            {{ at("atm.code.requested", { amount: selectedAmount }) }}
           </p>
-          <h1 class="text-lg font-black tracking-wide uppercase text-white leading-snug">
-            SAISISSEZ VOTRE CODE SECRET
-          </h1>
+          <p class="text-lg font-black tracking-wide uppercase text-white leading-snug">
+            {{ at("atm.code.title") }}
+          </p>
           <p class="text-white/60 text-sm italic">
-            à l'abri des regards indiscrets
+            {{ at("atm.code.discreet") }}
           </p>
           <p class="text-base font-black tracking-wide uppercase text-white mt-1">
-            PUIS VALIDEZ
+            {{ at("atm.code.thenConfirm") }}
           </p>
 
           <!-- Erreur -->

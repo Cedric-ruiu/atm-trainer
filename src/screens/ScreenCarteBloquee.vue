@@ -1,10 +1,12 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from "vue";
 import AtmScreenLayout from "../components/AtmScreenLayout.vue";
+import { useAtmI18n } from "../composables/useAtmI18n.js";
 import { useAtmState } from "../composables/useAtmState.js";
 import { useProgression } from "../composables/useProgression.js";
 import { useSession } from "../composables/useSession.js";
 
+const { at } = useAtmI18n();
 const { navigate } = useAtmState();
 const { currentUser, resetSession } = useSession();
 const { loadUser, recordSession } = useProgression();
@@ -41,10 +43,10 @@ onUnmounted(() => {
 
       <div class="text-center flex flex-col gap-2">
         <p class="text-2xl font-black tracking-widest uppercase text-white">
-          CARTE BLOQUÉE
+          {{ at("atm.carteBloquee.title") }}
         </p>
         <p class="text-white/70 text-base text-center leading-relaxed">
-          Veuillez vous rapprocher<br>d'un guichet
+          {{ at("atm.carteBloquee.instruction") }}
         </p>
       </div>
 
@@ -54,7 +56,7 @@ onUnmounted(() => {
         enter-to-class="opacity-100"
       >
         <p v-if="showFarewell" class="text-lg font-bold tracking-widest text-center" style="color: #f0c040">
-          Merci de votre visite
+          {{ at("atm.carteBloquee.farewell") }}
         </p>
       </Transition>
     </div>

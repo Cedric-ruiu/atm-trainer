@@ -1,8 +1,10 @@
 <script setup>
 import { inject, ref, watch } from "vue";
 import AtmScreenLayout from "../components/AtmScreenLayout.vue";
+import { useAtmI18n } from "../composables/useAtmI18n.js";
 import { useAtmState } from "../composables/useAtmState.js";
 
+const { at } = useAtmI18n();
 const { navigate } = useAtmState();
 
 const cardVisible = inject("cardVisible");
@@ -52,34 +54,34 @@ watch(step, (s) => {
 
       <!-- Choix reçu -->
       <template v-if="step === 'choice'">
-        <h1 class="text-xl font-black tracking-widest uppercase text-white text-center">
-          SOUHAITEZ-VOUS UN REÇU ?
-        </h1>
+        <p class="text-xl font-black tracking-widest uppercase text-white text-center">
+          {{ at("atm.recu.question") }}
+        </p>
         <div class="flex gap-4 w-full max-w-xs">
           <button
             class="flex-1 px-6 py-5 rounded-xl text-white text-lg font-bold tracking-wide transition-colors border"
             style="background: rgba(0,180,200,0.22); border-color: rgba(0,180,200,0.5)"
             @click="step = 'oui'"
           >
-            OUI
+            {{ at("atm.common.yes") }}
           </button>
           <button
             class="flex-1 px-6 py-5 rounded-xl text-white text-lg font-bold tracking-wide transition-colors border"
             style="background: rgba(220,50,50,0.2); border-color: rgba(220,50,50,0.45)"
             @click="step = 'non'"
           >
-            NON
+            {{ at("atm.common.no") }}
           </button>
         </div>
       </template>
 
       <!-- Avec reçu -->
       <template v-else-if="step === 'oui'">
-        <h1 class="text-xl font-black tracking-widest uppercase text-white text-center">
-          REPRENEZ VOTRE CARTE ET VOTRE REÇU
-        </h1>
+        <p class="text-xl font-black tracking-widest uppercase text-white text-center">
+          {{ at("atm.recu.takeBoth") }}
+        </p>
         <p class="text-white/60 text-sm text-center">
-          Glissez votre carte puis votre reçu vers la poche
+          {{ at("atm.recu.dragBoth") }}
         </p>
 
         <!-- Indicateurs de statut -->
@@ -96,7 +98,7 @@ watch(step, (s) => {
               </svg>
             </div>
             <p class="text-xs font-bold" :class="cardTaken ? 'text-[#00b4c8]' : 'text-white/50'">
-              {{ cardTaken ? '✓ Récupérée' : 'Carte' }}
+              {{ cardTaken ? at("atm.recu.cardTaken") : at("atm.recu.cardLabel") }}
             </p>
           </div>
           <div class="flex flex-col items-center gap-2">
@@ -111,7 +113,7 @@ watch(step, (s) => {
               </svg>
             </div>
             <p class="text-xs font-bold" :class="receiptTaken ? 'text-[#00b4c8]' : 'text-white/50'">
-              {{ receiptTaken ? '✓ Récupéré' : 'Reçu' }}
+              {{ receiptTaken ? at("atm.recu.receiptTaken") : at("atm.recu.receiptLabel") }}
             </p>
           </div>
         </div>
@@ -119,11 +121,11 @@ watch(step, (s) => {
 
       <!-- Sans reçu -->
       <template v-else-if="step === 'non'">
-        <h1 class="text-xl font-black tracking-widest uppercase text-white text-center">
-          RETIREZ VOTRE CARTE
-        </h1>
+        <p class="text-xl font-black tracking-widest uppercase text-white text-center">
+          {{ at("atm.common.takeCard") }}
+        </p>
         <p class="text-white/60 text-sm text-center">
-          Votre carte est disponible dans le lecteur
+          {{ at("atm.common.cardInReader") }}
         </p>
       </template>
 

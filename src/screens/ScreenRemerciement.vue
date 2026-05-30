@@ -1,9 +1,11 @@
 <script setup>
 import { onMounted, onUnmounted } from "vue";
 import AtmScreenLayout from "../components/AtmScreenLayout.vue";
+import { useAtmI18n } from "../composables/useAtmI18n.js";
 import { useAtmState } from "../composables/useAtmState.js";
 import { useSession } from "../composables/useSession.js";
 
+const { at } = useAtmI18n();
 const { navigate } = useAtmState();
 const { resetSession } = useSession();
 
@@ -23,10 +25,10 @@ onUnmounted(() => {
   <AtmScreenLayout :warn="false">
     <div class="flex-1 flex flex-col items-center justify-center gap-3 p-10">
       <p class="text-3xl font-black tracking-widest uppercase text-center leading-relaxed" style="color: #f0c040">
-        MERCI DE VOTRE VISITE
+        {{ at("atm.remerciement.thanks") }}
       </p>
       <p class="text-white/60 text-sm tracking-widest uppercase text-center">
-        Au revoir
+        {{ at("atm.remerciement.goodbye") }}
       </p>
     </div>
   </AtmScreenLayout>

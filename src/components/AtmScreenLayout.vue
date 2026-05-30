@@ -1,7 +1,11 @@
 <script setup>
+import { useAtmI18n } from "../composables/useAtmI18n.js";
+
 defineProps({
   warn: { type: Boolean, default: true },
 });
+
+const { at } = useAtmI18n();
 </script>
 
 <template>
@@ -12,8 +16,8 @@ defineProps({
     <!-- Header : logo banque -->
     <div class="flex items-center px-5 pt-3 pb-2 shrink-0">
       <div class="leading-none">
-        <p class="text-[9px] font-bold tracking-[0.35em] uppercase text-white/50">MA</p>
-        <p class="text-base font-black tracking-[0.2em] uppercase text-white leading-none">BANQUE</p>
+        <p class="text-[9px] font-bold tracking-[0.35em] uppercase text-white/50">{{ at("atm.chassis.bankTop") }}</p>
+        <p class="text-base font-black tracking-[0.2em] uppercase text-white leading-none">{{ at("atm.chassis.bankMain") }}</p>
       </div>
     </div>
 
@@ -31,9 +35,9 @@ defineProps({
       <span
         class="text-[10px] font-black tracking-[0.2em] uppercase px-2 py-0.5 rounded"
         style="color: #d4900a; background: rgba(212,144,10,0.15)"
-      >VIGILANCE FRAUDE</span>
+      >{{ at("atm.chassis.fraudBadge") }}</span>
       <p class="text-white/70 text-xs mt-0.5">
-        Protégez votre code secret lors de la saisie
+        {{ at("atm.chassis.fraudText") }}
       </p>
     </div>
   </div>

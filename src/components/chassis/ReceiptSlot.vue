@@ -1,5 +1,8 @@
 <script setup>
+import { useAtmI18n } from "../../composables/useAtmI18n.js";
 import DraggableReceipt from "../draggables/DraggableReceipt.vue";
+
+const { at } = useAtmI18n();
 
 const props = defineProps({
   portrait: Boolean,
@@ -28,7 +31,7 @@ const props = defineProps({
           <div class="relative flex items-center justify-center"
                style="width: var(--receipt-slot-w); height: 18px; background: #0a0c10; border-radius: 1px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.95);">
             <span v-if="!receiptVisible" class="text-[7px] tracking-wider uppercase select-none"
-                  style="color: rgba(255,255,255,0.22);">reçu</span>
+                  style="color: rgba(255,255,255,0.22);">{{ at("atm.chassis.slotReceipt") }}</span>
           </div>
           <div class="w-full mt-1 mb-1"
                style="height: 2px; border-radius: 1px; background: linear-gradient(90deg, transparent 0%, #e0a000 20%, #ffc800 50%, #e0a000 80%, transparent 100%); box-shadow: 0 0 5px rgba(255,180,0,0.6);" />

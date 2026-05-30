@@ -1,5 +1,8 @@
 <script setup>
+import { useAtmI18n } from "../../composables/useAtmI18n.js";
 import DraggableBills from "../draggables/DraggableBills.vue";
+
+const { at } = useAtmI18n();
 
 const props = defineProps({
   portrait: Boolean,
@@ -26,7 +29,7 @@ const props = defineProps({
         <div class="relative flex items-center justify-center"
              style="width: var(--bills-slot-w); height: 18px; background: #0a0c10; border-radius: 2px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.95);">
           <span v-if="!billsVisible" class="text-[7px] tracking-wider uppercase select-none"
-                style="color: rgba(255,255,255,0.2);">billets</span>
+                style="color: rgba(255,255,255,0.2);">{{ at("atm.chassis.slotBills") }}</span>
         </div>
         <div class="w-full mt-1 mb-1"
              style="height: 3px; border-radius: 1px; background: linear-gradient(90deg, transparent 0%, #0090e0 20%, #00b8ff 50%, #0090e0 80%, transparent 100%); box-shadow: 0 0 6px rgba(0,170,255,0.6);" />

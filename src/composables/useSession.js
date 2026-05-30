@@ -1,4 +1,5 @@
 import { ref } from "vue";
+import { resetAtmLocale } from "./useAtmLocale.js";
 import { useProgression } from "./useProgression.js";
 
 const { loadUser, saveUser } = useProgression();
@@ -29,6 +30,7 @@ export function useSession() {
     selectedAmount.value = 0;
     pinAttempts.value = 0;
     transactionType.value = null;
+    resetAtmLocale(); // ré-synchronise la langue du DAB sur la langue d'interface
     // currentUser and solde are preserved across resets
   }
 

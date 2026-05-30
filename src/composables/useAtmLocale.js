@@ -1,25 +1,22 @@
 // Axe B — locale du SIMULATEUR DAB (`atmLocale`), indépendante de la langue
-// d'interface (`appLocale`). Singletons module-level, SSR-safe (défaut "fr"),
-// sans dépendance à l'instance vue-i18n (créée par app).
+// d'interface (`appLocale`, pilotée par la route). Singletons module-level.
 //
 // Sémantique :
-//  - défaut = appLocale ;
-//  - suit appLocale tant qu'aucun choix explicite n'est fait dans ScreenLangue ;
-//  - après un choix, atmLocale devient indépendant (un switch d'interface ne le
-//    modifie plus) ;
-//  - resetSession() (retour Accueil / fin de flux) ré-synchronise sur appLocale.
+//  - tant qu'aucune langue n'est explicitement choisie dans ScreenLangue, le
+//    simulateur SUIT la langue d'interface (cf. useAtmI18n : `at()` dérive alors de
+//    la locale per-app, ce qui est SSG-safe — vite-ssg rend les routes en parallèle,
+//    donc on ne lit pas un ref module mutable pendant le pré-rendu) ;
+//  - un choix dans ScreenLangue fixe `atmLocale` et le rend indépendant ;
+//  - le switch d'interface ne modifie pas un `atmLocale` déjà choisi ;
+//  - `resetSession()` (retour Accueil / fin de flux) efface le choix → le simulateur
+//    re-suit la langue d'interface.
+//
+// Au build SSG, `atmLocaleChosen` reste `false` (aucune interaction) → les écrans
+// pré-rendus sont dans la langue de la page.
 import { ref } from "vue";
 
-export const appLocale = ref("fr"); // miroir de route.meta.locale
-export const atmLocale = ref("fr"); // locale du DAB simulé
-export const atmLocaleChosen = ref(false); // un choix explicite a-t-il été fait ?
-
-// Appelé par router.beforeEach. Fait suivre la locale du simulateur tant que
-// l'apprenant n'a pas explicitement choisi une langue dans ScreenLangue.
-export function setAppLocale(code) {
-  appLocale.value = code;
-  if (!atmLocaleChosen.value) atmLocale.value = code;
-}
+export const atmLocale = ref("fr");
+export const atmLocaleChosen = ref(false);
 
 export function chooseAtmLocale(code) {
   atmLocale.value = code;
@@ -28,5 +25,4 @@ export function chooseAtmLocale(code) {
 
 export function resetAtmLocale() {
   atmLocaleChosen.value = false;
-  atmLocale.value = appLocale.value;
 }

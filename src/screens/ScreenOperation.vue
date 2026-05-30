@@ -1,9 +1,11 @@
 <script setup>
 import { inject, ref } from "vue";
 import AtmScreenLayout from "../components/AtmScreenLayout.vue";
+import { useAtmI18n } from "../composables/useAtmI18n.js";
 import { useAtmState } from "../composables/useAtmState.js";
 import { useSession } from "../composables/useSession.js";
 
+const { at } = useAtmI18n();
 const { navigate } = useAtmState();
 const { setSelectedAmount, setTransactionType, solde } = useSession();
 
@@ -34,19 +36,19 @@ function handleCancel() {
 
       <!-- Mode annulation -->
       <template v-if="cancelMode">
-        <h1 class="text-xl font-black tracking-widest uppercase text-white text-center">
-          RETIREZ VOTRE CARTE
-        </h1>
+        <p class="text-xl font-black tracking-widest uppercase text-white text-center">
+          {{ at("atm.common.takeCard") }}
+        </p>
         <p class="text-white/60 text-sm text-center">
-          Votre carte est disponible dans le lecteur
+          {{ at("atm.common.cardInReader") }}
         </p>
       </template>
 
       <!-- Vue principale -->
       <template v-else>
-        <h1 class="text-xl font-black tracking-widest uppercase text-white text-center">
-          CHOISISSEZ VOTRE OPÉRATION
-        </h1>
+        <p class="text-xl font-black tracking-widest uppercase text-white text-center">
+          {{ at("atm.operation.title") }}
+        </p>
 
         <!-- Encart solde -->
         <Transition
@@ -59,7 +61,7 @@ function handleCancel() {
             class="w-full max-w-xs px-5 py-3 rounded-xl text-center"
             style="background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.15)"
           >
-            <p class="text-white/60 text-xs uppercase tracking-widest mb-1">Solde disponible</p>
+            <p class="text-white/60 text-xs uppercase tracking-widest mb-1">{{ at("atm.operation.balanceLabel") }}</p>
             <p class="text-3xl font-bold font-mono" style="color: #f0c040">{{ solde }} €</p>
           </div>
         </Transition>
@@ -70,28 +72,28 @@ function handleCancel() {
             style="background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25)"
             @click="selectExpress"
           >
-            Retrait rapide 50 €
+            {{ at("atm.operation.express", { amount: 50 }) }}
           </button>
           <button
             class="w-full px-6 py-4 rounded-xl text-white text-base font-bold tracking-wide transition-colors border text-left"
             style="background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25)"
             @click="navigate('ScreenMontant')"
           >
-            Autre montant
+            {{ at("atm.operation.otherAmount") }}
           </button>
           <button
             class="w-full px-6 py-4 rounded-xl text-white text-base font-bold tracking-wide transition-colors border text-left"
             style="background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25)"
             @click="showSolde = !showSolde"
           >
-            Consulter le solde
+            {{ at("atm.operation.checkBalance") }}
           </button>
           <button
             class="w-full px-6 py-4 rounded-xl text-white text-base font-bold tracking-wide transition-colors border text-left"
             style="background: rgba(220,50,50,0.2); border-color: rgba(220,50,50,0.45)"
             @click="handleCancel"
           >
-            Annuler
+            {{ at("atm.common.cancel") }}
           </button>
         </div>
       </template>

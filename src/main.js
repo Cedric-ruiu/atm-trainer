@@ -1,6 +1,5 @@
 import { ViteSSG } from "vite-ssg";
 import App from "./App.vue";
-import { setAppLocale } from "./composables/useAtmLocale.js";
 import { createAppI18n } from "./i18n/index.js";
 import HomePage from "./pages/HomePage.vue";
 import "./style.css";
@@ -20,9 +19,7 @@ export const createApp = ViteSSG(
     const i18n = createAppI18n();
     app.use(i18n);
     router.beforeEach((to) => {
-      const loc = to.meta.locale ?? "fr";
-      i18n.global.locale.value = loc;
-      setAppLocale(loc);
+      i18n.global.locale.value = to.meta.locale ?? "fr";
     });
   },
 );
