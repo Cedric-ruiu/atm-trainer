@@ -1,8 +1,11 @@
 <script setup>
+import { useI18n } from "vue-i18n";
 import ProjectInfo from "./ProjectInfo.vue";
 
 defineProps({ modelValue: Boolean });
 defineEmits(["update:modelValue"]);
+
+const { t } = useI18n();
 </script>
 
 <template>
@@ -29,7 +32,7 @@ defineEmits(["update:modelValue"]);
         <!-- Close button -->
         <button
           class="btn absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-colors text-lg font-light"
-          aria-label="Fermer"
+          :aria-label="t('intro.close')"
           @click="$emit('update:modelValue', false)"
         >×</button>
 

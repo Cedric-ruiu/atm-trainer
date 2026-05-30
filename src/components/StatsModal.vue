@@ -1,10 +1,13 @@
 <script setup>
 import { computed, ref, watch } from "vue";
+import { useI18n } from "vue-i18n";
 import { useProgression } from "../composables/useProgression.js";
 import { useSession } from "../composables/useSession.js";
 
 const props = defineProps({ modelValue: Boolean });
 const emit = defineEmits(["update:modelValue"]);
+
+const { t } = useI18n();
 
 const { currentUser, solde } = useSession();
 const { loadUser, saveUser } = useProgression();
@@ -28,7 +31,15 @@ watch(
 
 const stats = computed(() => {
   const u = currentUser.value;
-  if (!u) return { total: 0, successes: 0, failures: 0, currentStreak: 0, bestStreak: 0, objectif: 5 };
+  if (!u)
+    return {
+      total: 0,
+      successes: 0,
+      failures: 0,
+      currentStreak: 0,
+      bestStreak: 0,
+      objectif: 5,
+    };
   const sessions = u.sessions;
   const total = sessions.length;
   const successes = sessions.filter((s) => s.success).length;
@@ -46,7 +57,9 @@ const recentSessions = computed(() =>
   [...(currentUser.value?.sessions ?? [])].reverse(),
 );
 
-const objectifAtteint = computed(() => stats.value.bestStreak >= stats.value.objectif);
+const objectifAtteint = computed(
+  () => stats.value.bestStreak >= stats.value.objectif,
+);
 
 function formatTime(iso) {
   const d = new Date(iso);
@@ -101,19 +114,19 @@ function confirmReset() {
       >
         <button
           class="btn absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-colors text-lg font-light"
-          aria-label="Fermer"
+          :aria-label="t('intro.close')"
           @click="emit('update:modelValue', false)"
         >×</button>
 
         <div class="p-6">
-          <p class="text-xs font-bold tracking-widest uppercase text-yellow-400 mb-4">Objectifs / Statistiques</p>
+          <p class="text-xs font-bold tracking-widest uppercase text-yellow-400 mb-4">{{ t("stats.title") }}</p>
 
           <!-- Reset button -->
           <button
             class="btn w-full px-4 py-2.5 rounded-lg text-xs font-bold tracking-wide border mb-5 text-center"
             style="background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.3); color: rgba(239,68,68,0.7);"
             @click="showResetDialog = true"
-          >Réinitialiser les statistiques ↺</button>
+          >{{ t("stats.resetBtn") }}</button>
 
           <!-- Reset dialog overlay -->
           <Teleport to="body">
@@ -135,8 +148,8 @@ function confirmReset() {
                   class="w-full max-w-xs rounded-2xl p-5 text-white"
                   style="background: #1f2430; box-shadow: 0 24px 64px rgba(0,0,0,0.8); border: 1px solid rgba(239,68,68,0.3);"
                 >
-                  <p class="text-sm font-bold text-red-400 mb-1">Réinitialiser les statistiques ?</p>
-                  <p class="text-xs text-white/50 mb-4">L'historique, la série en cours et la meilleure série seront effacés.</p>
+                  <p class="text-sm font-bold text-red-400 mb-1">{{ t("stats.resetTitle") }}</p>
+                  <p class="text-xs text-white/50 mb-4">{{ t("stats.resetDesc") }}</p>
 
                   <!-- Options -->
                   <div class="flex flex-col gap-2 mb-5">
@@ -150,7 +163,7 @@ function confirmReset() {
                       >
                         <svg v-if="resetAlsoPin" viewBox="0 0 24 24" class="w-3 h-3 fill-white"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
                       </span>
-                      <span class="text-xs text-white/70">Réinitialiser aussi le code PIN</span>
+                      <span class="text-xs text-white/70">{{ t("stats.resetAlsoPin") }}</span>
                     </label>
                     <label class="flex items-center gap-3 cursor-pointer select-none">
                       <span
@@ -162,7 +175,7 @@ function confirmReset() {
                       >
                         <svg v-if="resetAlsoSolde" viewBox="0 0 24 24" class="w-3 h-3 fill-white"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
                       </span>
-                      <span class="text-xs text-white/70">Réinitialiser aussi le solde (→ {{ DEFAULT_SOLDE }} €)</span>
+                      <span class="text-xs text-white/70">{{ t("stats.resetAlsoSolde", { n: DEFAULT_SOLDE }) }}</span>
                     </label>
                   </div>
 
@@ -172,12 +185,12 @@ function confirmReset() {
                       class="btn flex-1 py-2.5 rounded-lg text-xs font-bold border"
                       style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.55);"
                       @click="showResetDialog = false"
-                    >Annuler</button>
+                    >{{ t("stats.cancel") }}</button>
                     <button
                       class="btn flex-1 py-2.5 rounded-lg text-xs font-bold border"
                       style="background: rgba(239,68,68,0.25); border-color: rgba(239,68,68,0.6); color: #fca5a5;"
                       @click="confirmReset"
-                    >Confirmer</button>
+                    >{{ t("stats.confirm") }}</button>
                   </div>
                 </div>
               </div>
@@ -188,7 +201,7 @@ function confirmReset() {
           <div class="flex gap-2 mb-5">
             <!-- Objectif série (editable) -->
             <div class="flex-1 rounded-xl p-3 text-center" style="background: rgba(0,0,0,0.3)">
-              <p class="text-white/50 text-[10px] uppercase tracking-widest mb-2">Objectif série</p>
+              <p class="text-white/50 text-[10px] uppercase tracking-widest mb-2">{{ t("stats.objectifSerie") }}</p>
               <div class="flex items-center justify-center gap-1">
                 <button
                   class="btn w-6 h-6 rounded text-white/60 font-bold text-sm flex items-center justify-center"
@@ -205,34 +218,34 @@ function confirmReset() {
             </div>
             <!-- Meilleure série -->
             <div class="flex-1 rounded-xl p-3 text-center" style="background: rgba(0,0,0,0.3)">
-              <p class="text-white/50 text-[10px] uppercase tracking-widest mb-2">Meilleure série</p>
+              <p class="text-white/50 text-[10px] uppercase tracking-widest mb-2">{{ t("stats.meilleureSerie") }}</p>
               <p class="text-xl font-bold" style="color: #00d4a0;">{{ stats.bestStreak }}</p>
             </div>
             <!-- Objectif rempli ? -->
             <div class="flex-1 rounded-xl p-3 text-center" style="background: rgba(0,0,0,0.3)">
-              <p class="text-white/50 text-[10px] uppercase tracking-widest mb-2">Objectif rempli ?</p>
+              <p class="text-white/50 text-[10px] uppercase tracking-widest mb-2">{{ t("stats.objectifRempli") }}</p>
               <p class="text-xl font-bold italic" :style="objectifAtteint ? 'color: #00d4a0;' : 'color: #ff6060;'">
-                {{ objectifAtteint ? 'OUI' : 'NON' }}
+                {{ objectifAtteint ? t("stats.yes") : t("stats.no") }}
               </p>
             </div>
           </div>
 
           <!-- Historique des tentatives header -->
-          <p class="text-white/40 text-xs uppercase tracking-widest mb-3">Historique des tentatives</p>
+          <p class="text-white/40 text-xs uppercase tracking-widest mb-3">{{ t("stats.historyTitle") }}</p>
 
           <!-- Total / Réussites / Échec -->
           <div class="flex gap-2 mb-4">
             <div class="flex-1 rounded-xl p-3 text-center" style="background: rgba(0,0,0,0.3)">
               <p class="text-xl font-bold text-white">{{ stats.total }}</p>
-              <p class="text-white/50 text-[10px] uppercase tracking-widest mt-1">Total</p>
+              <p class="text-white/50 text-[10px] uppercase tracking-widest mt-1">{{ t("stats.total") }}</p>
             </div>
             <div class="flex-1 rounded-xl p-3 text-center" style="background: rgba(0,0,0,0.3)">
               <p class="text-xl font-bold" style="color: #00d4a0;">{{ stats.successes }}</p>
-              <p class="text-white/50 text-[10px] uppercase tracking-widest mt-1">Réussites</p>
+              <p class="text-white/50 text-[10px] uppercase tracking-widest mt-1">{{ t("stats.successes") }}</p>
             </div>
             <div class="flex-1 rounded-xl p-3 text-center" style="background: rgba(0,0,0,0.3)">
               <p class="text-xl font-bold" style="color: #ff6060;">{{ stats.failures }}</p>
-              <p class="text-white/50 text-[10px] uppercase tracking-widest mt-1">Échec</p>
+              <p class="text-white/50 text-[10px] uppercase tracking-widest mt-1">{{ t("stats.failures") }}</p>
             </div>
           </div>
 
@@ -252,10 +265,10 @@ function confirmReset() {
               <svg v-else viewBox="0 0 24 24" class="w-4 h-4 shrink-0 fill-current">
                 <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" />
               </svg>
-              {{ session.success ? 'Succès' : 'Échec' }} à {{ formatTime(session.date) }}
+              {{ session.success ? t("stats.sessionSuccess") : t("stats.sessionFailure") }} {{ t("stats.sessionAt", { time: formatTime(session.date) }) }}
             </div>
           </div>
-          <p v-else class="text-white/30 text-xs text-center py-2">Aucune session enregistrée</p>
+          <p v-else class="text-white/30 text-xs text-center py-2">{{ t("stats.noSessions") }}</p>
         </div>
       </div>
     </div>

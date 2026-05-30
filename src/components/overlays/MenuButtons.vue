@@ -1,8 +1,12 @@
 <script setup>
 import { ref } from "vue";
+import { useI18n } from "vue-i18n";
 import InfoModal from "../InfoModal.vue";
 import PinSettingsModal from "../PinSettingsModal.vue";
 import StatsModal from "../StatsModal.vue";
+import LanguageSwitcher from "../ui/LanguageSwitcher.vue";
+
+const { t } = useI18n();
 
 const showInfo = ref(false);
 const showSettings = ref(false);
@@ -10,12 +14,12 @@ const showStats = ref(false);
 </script>
 
 <template>
-  <div class="fixed top-3 left-3 flex gap-1.5" style="z-index:var(--z-menu)">
+  <div class="fixed top-3 left-3 flex items-center gap-1.5" style="z-index:var(--z-menu)">
     <!-- Settings -->
     <button
       class="w-6 h-6 rounded-full border border-gray-400 text-gray-300 flex items-center justify-center opacity-40 hover:opacity-70 active:opacity-90 transition-opacity cursor-pointer touch-manipulation"
       style="background: rgba(255,255,255,0.06);"
-      aria-label="Paramètres du code"
+      :aria-label="t('menu.settings')"
       @click="showSettings = true"
     >
       <svg viewBox="0 0 20 20" class="w-3 h-3 fill-current">
@@ -26,7 +30,7 @@ const showStats = ref(false);
     <button
       class="w-6 h-6 rounded-full border border-gray-400 text-gray-300 flex items-center justify-center opacity-40 hover:opacity-70 active:opacity-90 transition-opacity cursor-pointer touch-manipulation"
       style="background: rgba(255,255,255,0.06);"
-      aria-label="Statistiques"
+      :aria-label="t('menu.stats')"
       @click="showStats = true"
     >
       <svg viewBox="0 0 20 20" class="w-3 h-3 fill-current">
@@ -37,9 +41,12 @@ const showStats = ref(false);
     <button
       class="w-6 h-6 rounded-full border border-gray-400 text-gray-300 text-[11px] font-bold flex items-center justify-center opacity-40 hover:opacity-70 active:opacity-90 transition-opacity cursor-pointer touch-manipulation"
       style="background: rgba(255,255,255,0.06);"
-      aria-label="Informations sur le projet"
+      :aria-label="t('menu.info')"
       @click="showInfo = true"
     >i</button>
+
+    <!-- Switch de langue d'interface — discret, à côté des boutons accompagnateur -->
+    <LanguageSwitcher variant="menu" />
 
     <PinSettingsModal v-model="showSettings" />
     <StatsModal v-model="showStats" />

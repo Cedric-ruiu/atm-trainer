@@ -21,5 +21,88 @@
       "Progress tracking with a customisable streak goal",
       "Works on tablet and browser, no installation required"
     ]
+  },
+  "menu": {
+    "settings": "PIN settings",
+    "stats": "Statistics",
+    "info": "Project information"
+  },
+  "intro": {
+    "start": "Start",
+    "close": "Close"
+  },
+  "project": {
+    "eyebrow": "Educational tool",
+    "title": "ATM Trainer — Cash Machine Simulator",
+    "aboutTitle": "About",
+    "aboutP1": "ATM Trainer is a cash machine (ATM) simulator designed to support people with cognitive disabilities as they learn to withdraw cash on their own.",
+    "aboutP2": "The app faithfully reproduces the steps of a cash withdrawal: inserting the card, choosing the language, selecting the operation, entering the amount and the PIN, collecting the bills and the receipt. Every physical interaction is simulated (sliding the card, collecting the bills…).",
+    "audienceTitle": "Who is it for",
+    "audienceList": [
+      "People with cognitive disabilities, mild intellectual disability, learning or attention disorders",
+      "Special educators, support workers and care professionals",
+      "Special-education and sheltered-workshop settings"
+    ],
+    "usageTitle": "How to use it",
+    "usageP": "No installation required. The app runs directly in the browser, on tablet or computer. It is designed for use in support sessions, in guided practice or in free training.",
+    "contribTitle": "Contribute to the project",
+    "contribP1": "ATM Trainer is an open-source project. All contributions are welcome, whether from developers or field professionals.",
+    "contribNonDevLead": "Not a developer?",
+    "contribNonDevBody": "You can open an issue to report a pedagogical problem, suggest an improvement or share your feedback. Your perspective as a field professional is invaluable!",
+    "contribDevLead": "Do you code?",
+    "contribDevBody": "Pull requests are welcome.",
+    "contribGithub": "View the project on GitHub",
+    "creditsTitle": "Credits",
+    "creditsList": [
+      "Résidence la Belle Vie — Pontivy",
+      "Jérémy Jaskolski — initiative and educational design",
+      "Alice Dupas — contribution",
+      "Cédric Ruiu — web development"
+    ],
+    "creditsSoundLabel": "Applause sound:",
+    "creditsSoundLink": "La Sonothèque",
+    "creditsSoundSuffix": "— free license (public domain equivalent)."
+  },
+  "stats": {
+    "title": "Goals / Statistics",
+    "resetBtn": "Reset statistics ↺",
+    "resetTitle": "Reset statistics?",
+    "resetDesc": "History, current streak and best streak will be erased.",
+    "resetAlsoPin": "Also reset the PIN code",
+    "resetAlsoSolde": "Also reset the balance (→ {n} €)",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "objectifSerie": "Streak goal",
+    "meilleureSerie": "Best streak",
+    "objectifRempli": "Goal reached?",
+    "yes": "YES",
+    "no": "NO",
+    "historyTitle": "Attempt history",
+    "total": "Total",
+    "successes": "Successes",
+    "failures": "Failures",
+    "sessionSuccess": "Success",
+    "sessionFailure": "Failure",
+    "sessionAt": "at {time}",
+    "noSessions": "No session recorded"
+  },
+  "pin": {
+    "title": "PIN settings",
+    "modeManual": "Enter a code",
+    "modeGenerated": "Generate a code",
+    "modeDemo": "No code",
+    "hide": "Hide",
+    "show": "Show code",
+    "valider": "Confirm",
+    "generatedHint": "Code generated automatically",
+    "demoHint": "Any 4-digit code will be accepted",
+    "clearBtn": "Clear current code ↺",
+    "soldeTitle": "Account balance",
+    "soldeReset": "Reset balance ({n} €) ↺"
+  },
+  "congrats": {
+    "eyebrow": "Goal reached!",
+    "title": "Congratulations!",
+    "hint": "Tap to continue"
   }
 }

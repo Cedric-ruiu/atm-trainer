@@ -2,8 +2,12 @@
 // Contenu descriptif du projet, réutilisé par InfoModal (bouton « i ») et
 // IntroOverlay (popup d'accueil indexable). `titleId` permet à chaque parent
 // de relier son aria-labelledby au h1 sans dupliquer d'identifiant dans le DOM.
+// Texte INTERFACE (axe A) : suit la locale d'interface via t()/tm()/rt().
+import { useI18n } from "vue-i18n";
+
 defineProps({ titleId: { type: String, default: undefined } });
 
+const { t, tm, rt } = useI18n();
 const baseUrl = import.meta.env.BASE_URL;
 </script>
 
@@ -11,7 +15,7 @@ const baseUrl = import.meta.env.BASE_URL;
   <div class="p-8">
     <!-- Header -->
     <div class="mb-6">
-      <p class="text-xs font-bold tracking-widest uppercase text-yellow-400 mb-2">Outil pédagogique</p>
+      <p class="text-xs font-bold tracking-widest uppercase text-yellow-400 mb-2">{{ t("project.eyebrow") }}</p>
       <img
         :src="`${baseUrl}dab-trainer-logo-text.svg`"
         alt=""
@@ -20,43 +24,29 @@ const baseUrl = import.meta.env.BASE_URL;
         class="w-full max-w-75 h-auto bg-white rounded-lg p-2 mb-3"
       />
       <h1 :id="titleId" class="text-xl font-black text-white leading-tight m-0">
-        DAB Trainer — Simulateur de distributeur de billets
+        {{ t("project.title") }}
       </h1>
     </div>
 
     <!-- What is it -->
     <section class="mb-6">
-      <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-2">À propos</h2>
-      <p class="text-gray-200 leading-relaxed text-sm">
-        DAB Trainer est un simulateur de distributeur automatique de billets (DAB), conçu pour accompagner
-        les personnes ayant des difficultés cognitives dans l'apprentissage du retrait d'argent en autonomie.
-      </p>
-      <p class="text-gray-200 leading-relaxed text-sm mt-2">
-        L'application reproduit fidèlement les étapes d'un retrait en espèces&nbsp;: insertion de la carte,
-        choix de la langue, sélection de l'opération, saisie du montant et du code PIN, récupération
-        des billets et du reçu. Toutes les interactions physiques sont simulées (glisser la carte,
-        récupérer les billets…).
-      </p>
+      <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-2">{{ t("project.aboutTitle") }}</h2>
+      <p class="text-gray-200 leading-relaxed text-sm">{{ t("project.aboutP1") }}</p>
+      <p class="text-gray-200 leading-relaxed text-sm mt-2">{{ t("project.aboutP2") }}</p>
     </section>
 
     <!-- Who is it for -->
     <section class="mb-6">
-      <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-2">Public visé</h2>
+      <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-2">{{ t("project.audienceTitle") }}</h2>
       <ul class="text-gray-200 text-sm space-y-1 leading-relaxed list-disc list-inside">
-        <li>Personnes avec troubles cognitifs, handicap mental léger, troubles DYS ou de l'attention</li>
-        <li>Éducateurs spécialisés, moniteurs-éducateurs, AMP/AES</li>
-        <li>Structures médico-sociales&nbsp;: ESAT, IME, SAVS, SAMSAH…</li>
+        <li v-for="(item, i) in tm('project.audienceList')" :key="i">{{ rt(item) }}</li>
       </ul>
     </section>
 
     <!-- How to use -->
     <section class="mb-6">
-      <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-2">Utilisation</h2>
-      <p class="text-gray-200 text-sm leading-relaxed">
-        Aucune installation requise. L'application fonctionne directement dans le navigateur,
-        sur tablette ou ordinateur. Elle est conçue pour être utilisée en séance d'accompagnement,
-        en autonomie guidée ou en entraînement libre.
-      </p>
+      <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-2">{{ t("project.usageTitle") }}</h2>
+      <p class="text-gray-200 text-sm leading-relaxed">{{ t("project.usageP") }}</p>
     </section>
 
     <!-- Divider -->
@@ -64,20 +54,15 @@ const baseUrl = import.meta.env.BASE_URL;
 
     <!-- Contribute -->
     <section class="mb-6">
-      <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-2">Contribuer au projet</h2>
+      <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-2">{{ t("project.contribTitle") }}</h2>
+      <p class="text-gray-200 text-sm leading-relaxed mb-3">{{ t("project.contribP1") }}</p>
       <p class="text-gray-200 text-sm leading-relaxed mb-3">
-        DAB Trainer est un projet open source. Toutes les contributions sont les bienvenues,
-        qu'elles viennent de développeurs ou de professionnels du terrain.
-      </p>
-      <p class="text-gray-200 text-sm leading-relaxed mb-3">
-        <span class="text-white font-semibold">Vous n'êtes pas développeur&nbsp;?</span>
-        Vous pouvez ouvrir une <strong>issue</strong> pour signaler un problème pédagogique,
-        suggérer une amélioration ou partager votre retour d'expérience.
-        Votre regard de professionnel de terrain est précieux&nbsp;!
+        <span class="text-white font-semibold">{{ t("project.contribNonDevLead") }}</span>
+        {{ t("project.contribNonDevBody") }}
       </p>
       <p class="text-gray-200 text-sm leading-relaxed">
-        <span class="text-white font-semibold">Vous développez&nbsp;?</span>
-        Les <strong>pull requests</strong> sont les bienvenues.
+        <span class="text-white font-semibold">{{ t("project.contribDevLead") }}</span>
+        {{ t("project.contribDevBody") }}
       </p>
       <a
         href="https://github.com/Cedric-ruiu/atm-trainer"
@@ -89,25 +74,22 @@ const baseUrl = import.meta.env.BASE_URL;
         <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
           <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
         </svg>
-        Voir le projet sur GitHub
+        {{ t("project.contribGithub") }}
       </a>
     </section>
 
     <!-- Credits -->
     <section>
-      <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-2">Crédits</h2>
+      <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-2">{{ t("project.creditsTitle") }}</h2>
       <ul class="text-gray-400 text-xs leading-relaxed space-y-1">
-        <li>Résidence la Belle Vie — Pontivy</li>
-        <li>Jérémy Jaskolski — initiative et conception pédagogique</li>
-        <li>Alice Dupas — contribution</li>
-        <li>Cédric Ruiu — développement web</li>
+        <li v-for="(item, i) in tm('project.creditsList')" :key="i">{{ rt(item) }}</li>
         <li class="pt-2">
-          Son d'applaudissements&nbsp;:
+          {{ t("project.creditsSoundLabel") }}
           <a href="https://lasonotheque.org" target="_blank" rel="noopener noreferrer"
              class="text-gray-300 underline hover:text-white transition-colors">
-            La Sonothèque
+            {{ t("project.creditsSoundLink") }}
           </a>
-          — licence libre (équivalent domaine public).
+          {{ t("project.creditsSoundSuffix") }}
         </li>
       </ul>
     </section>

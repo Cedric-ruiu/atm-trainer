@@ -1,6 +1,10 @@
 <script setup>
 import { onMounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import ProjectInfo from "../ProjectInfo.vue";
+import LanguageSwitcher from "../ui/LanguageSwitcher.vue";
+
+const { t } = useI18n();
 
 const STORAGE_KEY = "atm-trainer-intro-seen";
 
@@ -45,7 +49,7 @@ function close() {
       <!-- Close button -->
       <button
         class="btn absolute top-3 right-3 z-10 w-9 h-9 flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-colors text-xl font-light"
-        aria-label="Fermer"
+        :aria-label="t('intro.close')"
         @click="close"
       >×</button>
 
@@ -54,15 +58,16 @@ function close() {
         <ProjectInfo title-id="intro-title" />
       </div>
 
-      <!-- Pied fixe : CTA toujours visible, sans scroll -->
-      <div class="shrink-0 border-t border-white/10 p-4" style="background: #1a1e24;">
+      <!-- Pied fixe : sélecteur de langue d'interface (config éducateur) + CTA, sans scroll -->
+      <div class="shrink-0 border-t border-white/10 p-4 flex flex-col gap-3" style="background: #1a1e24;">
+        <LanguageSwitcher variant="intro" />
         <button
           ref="startBtn"
           class="btn w-full px-4 py-3 rounded-lg text-base font-bold text-white"
           style="background: #2457a0;"
           @click="close"
         >
-          Démarrer
+          {{ t("intro.start") }}
         </button>
       </div>
     </div>

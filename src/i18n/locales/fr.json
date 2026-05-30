@@ -21,5 +21,88 @@
       "Suivi de progression et objectif de série personnalisable",
       "Fonctionne sur tablette et navigateur, sans installation"
     ]
+  },
+  "menu": {
+    "settings": "Paramètres du code",
+    "stats": "Statistiques",
+    "info": "Informations sur le projet"
+  },
+  "intro": {
+    "start": "Démarrer",
+    "close": "Fermer"
+  },
+  "project": {
+    "eyebrow": "Outil pédagogique",
+    "title": "DAB Trainer — Simulateur de distributeur de billets",
+    "aboutTitle": "À propos",
+    "aboutP1": "DAB Trainer est un simulateur de distributeur automatique de billets (DAB), conçu pour accompagner les personnes ayant des difficultés cognitives dans l'apprentissage du retrait d'argent en autonomie.",
+    "aboutP2": "L'application reproduit fidèlement les étapes d'un retrait en espèces : insertion de la carte, choix de la langue, sélection de l'opération, saisie du montant et du code PIN, récupération des billets et du reçu. Toutes les interactions physiques sont simulées (glisser la carte, récupérer les billets…).",
+    "audienceTitle": "Public visé",
+    "audienceList": [
+      "Personnes avec troubles cognitifs, handicap mental léger, troubles DYS ou de l'attention",
+      "Éducateurs spécialisés, moniteurs-éducateurs, AMP/AES",
+      "Structures médico-sociales : ESAT, IME, SAVS, SAMSAH…"
+    ],
+    "usageTitle": "Utilisation",
+    "usageP": "Aucune installation requise. L'application fonctionne directement dans le navigateur, sur tablette ou ordinateur. Elle est conçue pour être utilisée en séance d'accompagnement, en autonomie guidée ou en entraînement libre.",
+    "contribTitle": "Contribuer au projet",
+    "contribP1": "DAB Trainer est un projet open source. Toutes les contributions sont les bienvenues, qu'elles viennent de développeurs ou de professionnels du terrain.",
+    "contribNonDevLead": "Vous n'êtes pas développeur ?",
+    "contribNonDevBody": "Vous pouvez ouvrir une issue pour signaler un problème pédagogique, suggérer une amélioration ou partager votre retour d'expérience. Votre regard de professionnel de terrain est précieux !",
+    "contribDevLead": "Vous développez ?",
+    "contribDevBody": "Les pull requests sont les bienvenues.",
+    "contribGithub": "Voir le projet sur GitHub",
+    "creditsTitle": "Crédits",
+    "creditsList": [
+      "Résidence la Belle Vie — Pontivy",
+      "Jérémy Jaskolski — initiative et conception pédagogique",
+      "Alice Dupas — contribution",
+      "Cédric Ruiu — développement web"
+    ],
+    "creditsSoundLabel": "Son d'applaudissements :",
+    "creditsSoundLink": "La Sonothèque",
+    "creditsSoundSuffix": "— licence libre (équivalent domaine public)."
+  },
+  "stats": {
+    "title": "Objectifs / Statistiques",
+    "resetBtn": "Réinitialiser les statistiques ↺",
+    "resetTitle": "Réinitialiser les statistiques ?",
+    "resetDesc": "L'historique, la série en cours et la meilleure série seront effacés.",
+    "resetAlsoPin": "Réinitialiser aussi le code PIN",
+    "resetAlsoSolde": "Réinitialiser aussi le solde (→ {n} €)",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "objectifSerie": "Objectif série",
+    "meilleureSerie": "Meilleure série",
+    "objectifRempli": "Objectif rempli ?",
+    "yes": "OUI",
+    "no": "NON",
+    "historyTitle": "Historique des tentatives",
+    "total": "Total",
+    "successes": "Réussites",
+    "failures": "Échec",
+    "sessionSuccess": "Succès",
+    "sessionFailure": "Échec",
+    "sessionAt": "à {time}",
+    "noSessions": "Aucune session enregistrée"
+  },
+  "pin": {
+    "title": "Paramètres du code",
+    "modeManual": "Rentrer un code",
+    "modeGenerated": "Générer un code",
+    "modeDemo": "Aucun code",
+    "hide": "Cacher",
+    "show": "Voir le code",
+    "valider": "Valider",
+    "generatedHint": "Code généré automatiquement",
+    "demoHint": "Tout code à 4 chiffres sera accepté",
+    "clearBtn": "Effacer le code en cours ↺",
+    "soldeTitle": "Solde du compte",
+    "soldeReset": "Réinitialiser le solde ({n} €) ↺"
+  },
+  "congrats": {
+    "eyebrow": "Objectif atteint !",
+    "title": "Félicitations !",
+    "hint": "Appuyez pour continuer"
   }
 }
