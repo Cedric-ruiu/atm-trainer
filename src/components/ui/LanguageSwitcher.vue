@@ -16,7 +16,7 @@ const { t, locale } = useI18n();
 
 const links = [
   { code: "fr", to: "/" },
-  { code: "en", to: "/en" },
+  { code: "en", to: "/en/" },
 ];
 </script>
 
