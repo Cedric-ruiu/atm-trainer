@@ -9,7 +9,7 @@ import "./style.css";
 // la même HomePage ; l'état du DAB (singletons module-level) persiste au switch.
 const routes = [
   { path: "/", component: HomePage, meta: { locale: "fr" } },
-  { path: "/en", component: HomePage, meta: { locale: "en" } },
+  { path: "/en/", component: HomePage, meta: { locale: "en" } },
 ];
 
 export const createApp = ViteSSG(
