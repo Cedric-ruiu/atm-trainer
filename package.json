@@ -52,7 +52,7 @@
   },
   "packageManager": "yarn@4.13.0",
   "dependencies": {
-    "@unhead/vue": "^2.1.2",
+    "@unhead/vue": "^2.1.15",
     "tailwindcss": "4.3.0",
     "vue": "3.5.35",
     "vue-i18n": "^11.4.4",
