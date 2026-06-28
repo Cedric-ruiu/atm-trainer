@@ -3,12 +3,25 @@
 // IntroOverlay (popup d'accueil indexable). `titleId` permet à chaque parent
 // de relier son aria-labelledby au h1 sans dupliquer d'identifiant dans le DOM.
 // Texte INTERFACE (axe A) : suit la locale d'interface via t()/tm()/rt().
+import { computed } from "vue";
 import { useI18n } from "vue-i18n";
+import { DATE_MODIFIED } from "../utils/siteMeta.js";
 
 defineProps({ titleId: { type: String, default: undefined } });
 
-const { t, tm, rt } = useI18n();
+const { t, tm, rt, locale } = useI18n();
 const baseUrl = import.meta.env.BASE_URL;
+
+// Date de mise à jour visible (signal de fraîcheur/Trust), formatée selon la
+// locale d'interface depuis la même constante que le dateModified du JSON-LD.
+// `T00:00:00` = minuit local → pas de décalage de jour selon le fuseau au build.
+const updatedDate = computed(() =>
+  new Intl.DateTimeFormat(locale.value, {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(`${DATE_MODIFIED}T00:00:00`)),
+);
 </script>
 
 <template>
@@ -26,6 +39,7 @@ const baseUrl = import.meta.env.BASE_URL;
       <h1 :id="titleId" class="text-xl font-black text-white leading-tight m-0">
         {{ t("project.title") }}
       </h1>
+      <p class="text-xs text-gray-500 mt-2">{{ t("project.updatedLabel") }} {{ updatedDate }}</p>
     </div>
 
     <!-- What is it -->

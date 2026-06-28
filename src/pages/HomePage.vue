@@ -14,6 +14,7 @@ import ScreenMontant from "../screens/ScreenMontant.vue";
 import ScreenOperation from "../screens/ScreenOperation.vue";
 import ScreenRecu from "../screens/ScreenRecu.vue";
 import ScreenRemerciement from "../screens/ScreenRemerciement.vue";
+import { DATE_MODIFIED, DATE_PUBLISHED } from "../utils/siteMeta.js";
 
 const screens = {
   ScreenAccueil,
@@ -59,8 +60,8 @@ useHead(() => {
     inLanguage: isEn ? "en" : "fr",
     isAccessibleForFree: true,
     softwareVersion: "1.0.0",
-    datePublished: "2026-04-10",
-    dateModified: "2026-05-30",
+    datePublished: DATE_PUBLISHED,
+    dateModified: DATE_MODIFIED,
     screenshot: OG_IMAGE,
     featureList: tm("meta.featureList").map((item) => rt(item)),
     keywords: t("meta.keywords"),

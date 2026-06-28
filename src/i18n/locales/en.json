@@ -33,6 +33,7 @@
   },
   "project": {
     "eyebrow": "Educational tool",
+    "updatedLabel": "Last updated:",
     "title": "ATM Trainer — Cash Machine Simulator",
     "aboutTitle": "About",
     "aboutP1": "ATM Trainer is a cash machine (ATM) simulator designed to support people with cognitive disabilities as they learn to withdraw cash on their own.",

@@ -33,6 +33,7 @@
   },
   "project": {
     "eyebrow": "Outil pédagogique",
+    "updatedLabel": "Mis à jour le",
     "title": "DAB Trainer — Simulateur de distributeur de billets",
     "aboutTitle": "À propos",
     "aboutP1": "DAB Trainer est un simulateur de distributeur automatique de billets (DAB), conçu pour accompagner les personnes ayant des difficultés cognitives dans l'apprentissage du retrait d'argent en autonomie.",
