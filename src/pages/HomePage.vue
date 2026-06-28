@@ -95,7 +95,10 @@ useHead(() => {
       { name: "description", content: t("meta.description") },
       { name: "keywords", content: t("meta.keywords") },
       { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "DAB Trainer" },
+      {
+        property: "og:site_name",
+        content: isEn ? "ATM Trainer" : "DAB Trainer",
+      },
       { property: "og:locale", content: isEn ? "en_US" : "fr_FR" },
       { property: "og:locale:alternate", content: isEn ? "fr_FR" : "en_US" },
       { property: "og:title", content: t("meta.ogTitle") },
