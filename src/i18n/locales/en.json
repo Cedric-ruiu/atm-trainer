@@ -45,6 +45,29 @@
     ],
     "usageTitle": "How to use it",
     "usageP": "No installation required. The app runs directly in the browser, on tablet or computer. It is designed for use in support sessions, in guided practice or in free training.",
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      {
+        "q": "What is an ATM simulator?",
+        "a": "An ATM simulator — also called a cash machine simulator — reproduces every step of a real cash withdrawal on screen, without a real card or real money. Learners can practise safely: inserting the card, entering the PIN, choosing an amount and collecting the bills, as many times as they need."
+      },
+      {
+        "q": "How can I teach someone with a cognitive disability to use an ATM?",
+        "a": "Guide the learner through each step at their own pace, repeating the same sequence until it feels familiar. A simulator removes the pressure of a real machine: no money is at stake and there is no time limit, so they can practise — first supported, then independently — before visiting an actual ATM."
+      },
+      {
+        "q": "Is ATM Trainer free?",
+        "a": "Yes. ATM Trainer is completely free, with no ads and no sign-up, and it is open source under the MIT license. It runs straight in the browser on a tablet or computer, with nothing to install. Special educators, families and care settings can freely use and share it."
+      },
+      {
+        "q": "What device should I use?",
+        "a": "ATM Trainer works on tablet, computer and web browser, with no installation. A tablet is the recommended device: its touch screen mirrors the real gestures used on a cash machine's screen and keypad. All you need is an internet connection to open it and start practising."
+      },
+      {
+        "q": "What makes ATM Trainer different?",
+        "a": "ATM Trainer brings together choices no other tool combines: a hands-on drag-and-drop chassis (card, bills, receipt), euro banknotes (€50, €20 and €10), a bilingual English-French interface, and a design built specifically for cognitive disabilities — all free and open source for special-education use."
+      }
+    ],
     "contribTitle": "Contribute to the project",
     "contribP1": "ATM Trainer is an open-source project. All contributions are welcome, whether from developers or field professionals.",
     "contribNonDevLead": "Not a developer?",

@@ -75,6 +75,18 @@ useHead(() => {
     codeRepository: "https://github.com/Cedric-ruiu/atm-trainer",
   };
 
+  // FAQPage construit depuis les mêmes clés i18n que la FAQ visible (ProjectInfo)
+  // → le schema reflète toujours la copie affichée, par locale.
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: tm("project.faq").map((item) => ({
+      "@type": "Question",
+      name: rt(item.q),
+      acceptedAnswer: { "@type": "Answer", text: rt(item.a) },
+    })),
+  };
+
   return {
     htmlAttrs: { lang: isEn ? "en" : "fr" },
     title: t("meta.title"),
@@ -104,6 +116,7 @@ useHead(() => {
     ],
     script: [
       { type: "application/ld+json", innerHTML: JSON.stringify(appSchema) },
+      { type: "application/ld+json", innerHTML: JSON.stringify(faqSchema) },
     ],
   };
 });

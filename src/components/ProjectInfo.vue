@@ -49,6 +49,15 @@ const baseUrl = import.meta.env.BASE_URL;
       <p class="text-gray-200 text-sm leading-relaxed">{{ t("project.usageP") }}</p>
     </section>
 
+    <!-- FAQ -->
+    <section class="mb-6">
+      <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-3">{{ t("project.faqTitle") }}</h2>
+      <div v-for="(item, i) in tm('project.faq')" :key="i" class="mb-4 last:mb-0">
+        <h3 class="text-sm font-semibold text-white leading-snug mb-1">{{ rt(item.q) }}</h3>
+        <p class="text-gray-200 text-sm leading-relaxed">{{ rt(item.a) }}</p>
+      </div>
+    </section>
+
     <!-- Divider -->
     <hr class="border-white/10 mb-6" />
 

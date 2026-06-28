@@ -45,6 +45,29 @@
     ],
     "usageTitle": "Utilisation",
     "usageP": "Aucune installation requise. L'application fonctionne directement dans le navigateur, sur tablette ou ordinateur. Elle est conçue pour être utilisée en séance d'accompagnement, en autonomie guidée ou en entraînement libre.",
+    "faqTitle": "Questions fréquentes",
+    "faq": [
+      {
+        "q": "Qu'est-ce qu'un simulateur de DAB ?",
+        "a": "Un simulateur de DAB — distributeur automatique de billets, aussi appelé GAB ou guichet automatique — reproduit à l'écran toutes les étapes d'un retrait, sans carte ni argent réels. On peut s'entraîner en toute sécurité : insérer la carte, saisir son code, choisir un montant et récupérer les billets, autant de fois que nécessaire."
+      },
+      {
+        "q": "Comment aider une personne en situation de handicap à retirer de l'argent ?",
+        "a": "Accompagnez la personne étape par étape, à son rythme, en répétant le même parcours jusqu'à ce qu'il devienne familier. Le simulateur supprime la pression d'un vrai distributeur : aucun argent en jeu, aucune limite de temps. On s'exerce d'abord guidé, puis en autonomie, avant de se rendre à un vrai DAB."
+      },
+      {
+        "q": "Le simulateur est-il gratuit ?",
+        "a": "Oui. DAB Trainer est entièrement gratuit, sans publicité ni inscription, et open source sous licence MIT. Il fonctionne directement dans le navigateur, sur tablette ou ordinateur, sans rien installer. Éducateurs, familles et structures médico-sociales peuvent l'utiliser et le partager librement, en séance comme en entraînement personnel."
+      },
+      {
+        "q": "Sur quel appareil utiliser le simulateur ?",
+        "a": "DAB Trainer fonctionne sur tablette, ordinateur et navigateur web, sans installation. La tablette est l'appareil conseillé : son écran tactile reproduit au plus près les gestes réels sur l'écran et le clavier d'un distributeur. Une simple connexion internet suffit pour y accéder et commencer l'entraînement."
+      },
+      {
+        "q": "Qu'est-ce qui distingue DAB Trainer ?",
+        "a": "DAB Trainer combine des choix qu'aucun autre outil ne réunit : un châssis manipulable au glisser-déposer (carte, billets, reçu), des billets en euros (50, 20 et 10 €), une interface bilingue français-anglais, et une conception pensée pour le handicap cognitif. Le tout gratuit et open source."
+      }
+    ],
     "contribTitle": "Contribuer au projet",
     "contribP1": "DAB Trainer est un projet open source. Toutes les contributions sont les bienvenues, qu'elles viennent de développeurs ou de professionnels du terrain.",
     "contribNonDevLead": "Vous n'êtes pas développeur ?",
