@@ -33,6 +33,7 @@
   },
   "project": {
     "eyebrow": "Educational tool",
+    "logoAlt": "ATM Trainer",
     "updatedLabel": "Last updated:",
     "title": "ATM Trainer — Free Cash Machine Simulator",
     "aboutTitle": "About",

@@ -31,7 +31,7 @@ const updatedDate = computed(() =>
       <p class="text-xs font-bold tracking-widest uppercase text-yellow-400 mb-2">{{ t("project.eyebrow") }}</p>
       <img
         :src="`${baseUrl}dab-trainer-logo-text.svg`"
-        alt=""
+        :alt="t('project.logoAlt')"
         width="380"
         height="70"
         class="w-full max-w-75 h-auto bg-white rounded-lg p-2 mb-3"

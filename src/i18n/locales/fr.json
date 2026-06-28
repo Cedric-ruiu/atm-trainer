@@ -33,6 +33,7 @@
   },
   "project": {
     "eyebrow": "Outil pédagogique",
+    "logoAlt": "DAB Trainer",
     "updatedLabel": "Mis à jour le",
     "title": "DAB Trainer — Simulateur de distributeur de billets",
     "aboutTitle": "À propos",
