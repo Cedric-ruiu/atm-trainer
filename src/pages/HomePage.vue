@@ -93,7 +93,6 @@ useHead(() => {
     title: t("meta.title"),
     meta: [
       { name: "description", content: t("meta.description") },
-      { name: "keywords", content: t("meta.keywords") },
       { property: "og:type", content: "website" },
       {
         property: "og:site_name",
