@@ -58,7 +58,11 @@ const backLayers = computed(() => {
   const layers = [];
   // From the deepest (drawn first) up to the one just behind the top bill.
   for (let i = count; i >= 1; i--) {
-    layers.push({ color: billBgColor(breakdown[i]), dx: i * STEP_X, dy: i * STEP_Y });
+    layers.push({
+      color: billBgColor(breakdown[i]),
+      dx: i * STEP_X,
+      dy: i * STEP_Y,
+    });
   }
   return layers;
 });
@@ -76,11 +80,11 @@ const billsViewBox = computed(() => {
   return `0 0 ${w} ${h}`;
 });
 
-const gradId = computed(() => props.portrait ? "db-pt-grad" : "db-ls-grad");
+const gradId = computed(() => (props.portrait ? "db-pt-grad" : "db-ls-grad"));
 
-const handleDown   = (e) => props.doDown?.(e);
-const handleMove   = (e) => props.doMove?.(e);
-const handleUp     = (e) => props.doUp?.(e);
+const handleDown = (e) => props.doDown?.(e);
+const handleMove = (e) => props.doMove?.(e);
+const handleUp = (e) => props.doUp?.(e);
 const handleCancel = (e) => props.doCancel?.(e);
 </script>
 

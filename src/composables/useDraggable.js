@@ -3,13 +3,13 @@
 import { ref } from "vue";
 
 export function useDraggable({
-  posX,         // external ref — composable writes cursor X (shared across instances OK since mutex)
-  posY,         // external ref — composable writes cursor Y
-  dropZones = {},  // { name: domRef } or { name: { ref, mode?, overlap?, tolerancePx? } }
-  enabled,      // optional ref/computed → boolean
-  onStart,      // () => void — fired on pointerdown before drag begins
-  onDrop,       // (zoneName) => void — fired on pointerup inside a zone
-  onProximity,  // (zoneName) => void — fired mid-drag when hit (stops drag immediately)
+  posX, // external ref — composable writes cursor X (shared across instances OK since mutex)
+  posY, // external ref — composable writes cursor Y
+  dropZones = {}, // { name: domRef } or { name: { ref, mode?, overlap?, tolerancePx? } }
+  enabled, // optional ref/computed → boolean
+  onStart, // () => void — fired on pointerdown before drag begins
+  onDrop, // (zoneName) => void — fired on pointerup inside a zone
+  onProximity, // (zoneName) => void — fired mid-drag when hit (stops drag immediately)
   onDropOutside, // (x, y) => void — fired on pointerup outside all zones
 } = {}) {
   const isDragging = ref(false);
@@ -49,14 +49,17 @@ export function useDraggable({
     const { rect, mode, overlap, tolerancePx } = zone;
     if (mode === "edge-top+overlap") {
       const top = cy - elH / 2;
-      if (top < rect.top - tolerancePx || top > rect.bottom + tolerancePx) return false;
+      if (top < rect.top - tolerancePx || top > rect.bottom + tolerancePx)
+        return false;
       const left = cx - elW / 2;
       const right = cx + elW / 2;
       const ol = Math.max(left, rect.left);
       const or2 = Math.min(right, rect.right);
       return Math.max(0, or2 - ol) / elW >= overlap;
     }
-    return cx >= rect.left && cx <= rect.right && cy >= rect.top && cy <= rect.bottom;
+    return (
+      cx >= rect.left && cx <= rect.right && cy >= rect.top && cy <= rect.bottom
+    );
   }
 
   function onPointerDown(e) {
@@ -74,7 +77,9 @@ export function useDraggable({
     _vpH = window.innerHeight;
     _buildZoneRects();
     isDragging.value = true;
-    try { e.currentTarget.setPointerCapture(e.pointerId); } catch (_) {}
+    try {
+      e.currentTarget.setPointerCapture(e.pointerId);
+    } catch (_) {}
     onStart?.();
   }
 
@@ -95,7 +100,9 @@ export function useDraggable({
         if (!zone.proximity) continue;
         if (_checkHit(cx, cy, zone)) {
           isDragging.value = false;
-          try { e.currentTarget?.releasePointerCapture(e.pointerId); } catch (_) {}
+          try {
+            e.currentTarget?.releasePointerCapture(e.pointerId);
+          } catch (_) {}
           onProximity(name);
           return;
         }
@@ -106,7 +113,9 @@ export function useDraggable({
   function onPointerUp(e) {
     if (!isDragging.value) return;
     isDragging.value = false;
-    try { e.currentTarget?.releasePointerCapture(e.pointerId); } catch (_) {}
+    try {
+      e.currentTarget?.releasePointerCapture(e.pointerId);
+    } catch (_) {}
     const cx = e.clientX - offX.value;
     const cy = e.clientY - offY.value;
 
@@ -130,5 +139,13 @@ export function useDraggable({
     zoneRects = {};
   }
 
-  return { isDragging, cardSize, onPointerDown, onPointerMove, onPointerUp, onPointerCancel, cancel };
+  return {
+    isDragging,
+    cardSize,
+    onPointerDown,
+    onPointerMove,
+    onPointerUp,
+    onPointerCancel,
+    cancel,
+  };
 }
