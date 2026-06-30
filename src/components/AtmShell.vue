@@ -16,8 +16,12 @@ const useLegacyLayout =
 
 const { currentScreen } = useAtmState();
 const {
-  cardVisible, receiptVisible, billsVisible,
-  onCardClick, onReceiptClick, onBillsClick,
+  cardVisible,
+  receiptVisible,
+  billsVisible,
+  onCardClick,
+  onReceiptClick,
+  onBillsClick,
   cardInReader,
   resetAll,
 } = useAtmObjects();
@@ -69,8 +73,12 @@ const ejecting = ref(false);
 
 const readerSlotRef = ref(null);
 const pocketZoneRef = ref(null);
-const setReaderSlotEl = (el) => { readerSlotRef.value = el; };
-const setPocketZoneEl = (el) => { pocketZoneRef.value = el; };
+const setReaderSlotEl = (el) => {
+  readerSlotRef.value = el;
+};
+const setPocketZoneEl = (el) => {
+  pocketZoneRef.value = el;
+};
 
 function triggerSwallow(slotRect) {
   const cardH = cardDrag.cardSize.value.h;
@@ -94,11 +102,20 @@ const cardDrag = useDraggable({
   dropZones: () => {
     const zones = { pocket: pocketZoneRef };
     if (!cardInReader.value && !swallowing.value) {
-      zones.slot = { ref: readerSlotRef, mode: "edge-top+overlap", overlap: 0.8, tolerancePx: 8, proximity: true };
+      zones.slot = {
+        ref: readerSlotRef,
+        mode: "edge-top+overlap",
+        overlap: 0.8,
+        tolerancePx: 8,
+        proximity: true,
+      };
     }
     return zones;
   },
-  onStart: () => { cardFloating.value = false; ejecting.value = false; },
+  onStart: () => {
+    cardFloating.value = false;
+    ejecting.value = false;
+  },
   onProximity: (zoneName) => {
     if (zoneName === "slot") {
       triggerSwallow(readerSlotRef.value.getBoundingClientRect());
@@ -134,7 +151,9 @@ watch(cardInReader, (inReader) => {
   if (inReader && cardVisible.value) {
     cardFloating.value = false;
     ejecting.value = true;
-    setTimeout(() => { ejecting.value = false; }, 3000);
+    setTimeout(() => {
+      ejecting.value = false;
+    }, 3000);
   }
 });
 
@@ -149,9 +168,20 @@ const receiptDrag = useDraggable({
   posY: dragY,
   dropZones: { pocket: pocketZoneRef },
   enabled: () => !cardDrag.isDragging.value,
-  onStart: () => { receiptFloating.value = false; receiptEjecting.value = false; },
-  onDrop: () => { receiptVisible.value = false; receiptFloating.value = false; onReceiptClick.value?.(); },
-  onDropOutside: (cx, cy) => { receiptFloating.value = true; receiptFloatX.value = cx; receiptFloatY.value = cy; },
+  onStart: () => {
+    receiptFloating.value = false;
+    receiptEjecting.value = false;
+  },
+  onDrop: () => {
+    receiptVisible.value = false;
+    receiptFloating.value = false;
+    onReceiptClick.value?.();
+  },
+  onDropOutside: (cx, cy) => {
+    receiptFloating.value = true;
+    receiptFloatX.value = cx;
+    receiptFloatY.value = cy;
+  },
 });
 const isReceiptDragging = receiptDrag.isDragging;
 const onReceiptPointerDown = receiptDrag.onPointerDown;
@@ -163,7 +193,9 @@ watch(receiptVisible, (visible) => {
   if (visible) {
     receiptFloating.value = false;
     receiptEjecting.value = true;
-    setTimeout(() => { receiptEjecting.value = false; }, 3000);
+    setTimeout(() => {
+      receiptEjecting.value = false;
+    }, 3000);
   }
 });
 
@@ -177,9 +209,19 @@ const billsDrag = useDraggable({
   posY: dragY,
   dropZones: { pocket: pocketZoneRef },
   enabled: () => !cardDrag.isDragging.value && !receiptDrag.isDragging.value,
-  onStart: () => { billsFloating.value = false; },
-  onDrop: () => { billsVisible.value = false; billsFloating.value = false; onBillsClick.value?.(); },
-  onDropOutside: (cx, cy) => { billsFloating.value = true; billsFloatX.value = cx; billsFloatY.value = cy; },
+  onStart: () => {
+    billsFloating.value = false;
+  },
+  onDrop: () => {
+    billsVisible.value = false;
+    billsFloating.value = false;
+    onBillsClick.value?.();
+  },
+  onDropOutside: (cx, cy) => {
+    billsFloating.value = true;
+    billsFloatX.value = cx;
+    billsFloatY.value = cy;
+  },
 });
 const isBillsDragging = billsDrag.isDragging;
 const onBillsPointerDown = billsDrag.onPointerDown;

@@ -3,12 +3,25 @@
 // IntroOverlay (popup d'accueil indexable). `titleId` permet à chaque parent
 // de relier son aria-labelledby au h1 sans dupliquer d'identifiant dans le DOM.
 // Texte INTERFACE (axe A) : suit la locale d'interface via t()/tm()/rt().
+import { computed } from "vue";
 import { useI18n } from "vue-i18n";
+import { DATE_MODIFIED } from "../utils/siteMeta.js";
 
 defineProps({ titleId: { type: String, default: undefined } });
 
-const { t, tm, rt } = useI18n();
+const { t, tm, rt, locale } = useI18n();
 const baseUrl = import.meta.env.BASE_URL;
+
+// Date de mise à jour visible (signal de fraîcheur/Trust), formatée selon la
+// locale d'interface depuis la même constante que le dateModified du JSON-LD.
+// `T00:00:00` = minuit local → pas de décalage de jour selon le fuseau au build.
+const updatedDate = computed(() =>
+  new Intl.DateTimeFormat(locale.value, {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(`${DATE_MODIFIED}T00:00:00`)),
+);
 </script>
 
 <template>
@@ -18,7 +31,7 @@ const baseUrl = import.meta.env.BASE_URL;
       <p class="text-xs font-bold tracking-widest uppercase text-yellow-400 mb-2">{{ t("project.eyebrow") }}</p>
       <img
         :src="`${baseUrl}dab-trainer-logo-text.svg`"
-        alt=""
+        :alt="t('project.logoAlt')"
         width="380"
         height="70"
         class="w-full max-w-75 h-auto bg-white rounded-lg p-2 mb-3"
@@ -26,6 +39,7 @@ const baseUrl = import.meta.env.BASE_URL;
       <h1 :id="titleId" class="text-xl font-black text-white leading-tight m-0">
         {{ t("project.title") }}
       </h1>
+      <p class="text-xs text-gray-500 mt-2">{{ t("project.updatedLabel") }} {{ updatedDate }}</p>
     </div>
 
     <!-- What is it -->
@@ -47,6 +61,15 @@ const baseUrl = import.meta.env.BASE_URL;
     <section class="mb-6">
       <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-2">{{ t("project.usageTitle") }}</h2>
       <p class="text-gray-200 text-sm leading-relaxed">{{ t("project.usageP") }}</p>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mb-6">
+      <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-3">{{ t("project.faqTitle") }}</h2>
+      <div v-for="(item, i) in tm('project.faq')" :key="i" class="mb-4 last:mb-0">
+        <h3 class="text-sm font-semibold text-white leading-snug mb-1">{{ rt(item.q) }}</h3>
+        <p class="text-gray-200 text-sm leading-relaxed">{{ rt(item.a) }}</p>
+      </div>
     </section>
 
     <!-- Divider -->

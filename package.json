@@ -40,22 +40,22 @@
     "build": "vite-ssg build",
     "preview": "vite preview",
     "lint": "biome check .",
-    "format": "biome format --write . && biome check . --write"
+    "format": "biome format --write . && biome check . --write --unsafe"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.16",
-    "@tailwindcss/vite": "4.3.0",
+    "@biomejs/biome": "2.5.1",
+    "@tailwindcss/vite": "4.3.2",
     "@vitejs/plugin-vue": "6.0.7",
-    "@vue/server-renderer": "^3.5.35",
-    "vite": "8.0.14",
+    "@vue/server-renderer": "^3.5.39",
+    "vite": "8.1.0",
     "vite-ssg": "^28.3.0"
   },
   "packageManager": "yarn@4.13.0",
   "dependencies": {
     "@unhead/vue": "^2.1.15",
-    "tailwindcss": "4.3.0",
-    "vue": "3.5.35",
-    "vue-i18n": "^11.4.4",
+    "tailwindcss": "4.3.2",
+    "vue": "3.5.39",
+    "vue-i18n": "^11.4.6",
     "vue-router": "^5.1.0"
   }
 }

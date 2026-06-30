@@ -32,7 +32,7 @@ function onSoldeInput(e) {
 
 function onSoldeBlur() {
   const parsed = parseInt(soldeInput.value, 10);
-  if (!isNaN(parsed) && parsed >= 0) {
+  if (!Number.isNaN(parsed) && parsed >= 0) {
     setSolde(parsed);
   } else {
     soldeInput.value = String(solde.value);

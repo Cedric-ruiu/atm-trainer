@@ -9,31 +9,31 @@
 
 /* ── Draggable object dimensions — vmin base (iOS 15+), cqi enhancement ─── */
 :root {
-  --card-w:    clamp(70px, 12vmin, 130px);
-  --card-h:    calc(var(--card-w) * 1.585);
+  --card-w: clamp(70px, 12vmin, 130px);
+  --card-h: calc(var(--card-w) * 1.585);
 
   --receipt-w: clamp(42px, 7vmin, 80px);
   --receipt-h: calc(var(--receipt-w) * 2.71);
 
-  --bills-w:   clamp(150px, 30vmin, 300px);
-  --bills-h:   calc(var(--bills-w) * 0.53);
+  --bills-w: clamp(150px, 30vmin, 300px);
+  --bills-h: calc(var(--bills-w) * 0.53);
 
   /* Slot/peek derived values */
-  --card-slot-w:    calc(var(--card-w) + 10px);
-  --card-peek-h:    calc(var(--card-h) * 0.30);
+  --card-slot-w: calc(var(--card-w) + 10px);
+  --card-peek-h: calc(var(--card-h) * 0.3);
 
   --receipt-slot-w: calc(var(--receipt-w) + 4px);
-  --receipt-peek-h: calc(var(--receipt-h) * 0.30);
+  --receipt-peek-h: calc(var(--receipt-h) * 0.3);
 
-  --bills-slot-w:      calc(var(--bills-w) + 10px);
-  --bills-visible-h:   calc(var(--bills-h) * 0.67);
+  --bills-slot-w: calc(var(--bills-w) + 10px);
+  --bills-visible-h: calc(var(--bills-h) * 0.67);
 
   /* Z-index scale (replaces 9400/9500/9997/9998/9999/10000) */
   --z-floating: 20;
   --z-dragging: 30;
-  --z-swallow:  40;
-  --z-menu:    100;
-  --z-modal:   200;
+  --z-swallow: 40;
+  --z-menu: 100;
+  --z-modal: 200;
   --z-congrats: 300;
 }
 
@@ -42,8 +42,8 @@
   .atm-chassis {
     container-type: inline-size;
     container-name: chassis;
-    --card-w:    clamp(70px, 12cqi, 130px);
+    --card-w: clamp(70px, 12cqi, 130px);
     --receipt-w: clamp(42px, 7cqi, 80px);
-    --bills-w:   clamp(150px, 30cqi, 300px);
+    --bills-w: clamp(150px, 30cqi, 300px);
   }
 }

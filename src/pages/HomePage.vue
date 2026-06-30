@@ -14,6 +14,7 @@ import ScreenMontant from "../screens/ScreenMontant.vue";
 import ScreenOperation from "../screens/ScreenOperation.vue";
 import ScreenRecu from "../screens/ScreenRecu.vue";
 import ScreenRemerciement from "../screens/ScreenRemerciement.vue";
+import { DATE_MODIFIED, DATE_PUBLISHED } from "../utils/siteMeta.js";
 
 const screens = {
   ScreenAccueil,
@@ -59,8 +60,8 @@ useHead(() => {
     inLanguage: isEn ? "en" : "fr",
     isAccessibleForFree: true,
     softwareVersion: "1.0.0",
-    datePublished: "2026-04-10",
-    dateModified: "2026-05-30",
+    datePublished: DATE_PUBLISHED,
+    dateModified: DATE_MODIFIED,
     screenshot: OG_IMAGE,
     featureList: tm("meta.featureList").map((item) => rt(item)),
     keywords: t("meta.keywords"),
@@ -75,14 +76,28 @@ useHead(() => {
     codeRepository: "https://github.com/Cedric-ruiu/atm-trainer",
   };
 
+  // FAQPage construit depuis les mêmes clés i18n que la FAQ visible (ProjectInfo)
+  // → le schema reflète toujours la copie affichée, par locale.
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: tm("project.faq").map((item) => ({
+      "@type": "Question",
+      name: rt(item.q),
+      acceptedAnswer: { "@type": "Answer", text: rt(item.a) },
+    })),
+  };
+
   return {
     htmlAttrs: { lang: isEn ? "en" : "fr" },
     title: t("meta.title"),
     meta: [
       { name: "description", content: t("meta.description") },
-      { name: "keywords", content: t("meta.keywords") },
       { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "DAB Trainer" },
+      {
+        property: "og:site_name",
+        content: isEn ? "ATM Trainer" : "DAB Trainer",
+      },
       { property: "og:locale", content: isEn ? "en_US" : "fr_FR" },
       { property: "og:locale:alternate", content: isEn ? "fr_FR" : "en_US" },
       { property: "og:title", content: t("meta.ogTitle") },
@@ -104,6 +119,7 @@ useHead(() => {
     ],
     script: [
       { type: "application/ld+json", innerHTML: JSON.stringify(appSchema) },
+      { type: "application/ld+json", innerHTML: JSON.stringify(faqSchema) },
     ],
   };
 });

@@ -32,7 +32,15 @@ export function useProgression() {
 
   function getStats() {
     const user = loadUser();
-    if (!user) return { total: 0, successes: 0, failures: 0, currentStreak: 0, bestStreak: 0, objectif: 5 };
+    if (!user)
+      return {
+        total: 0,
+        successes: 0,
+        failures: 0,
+        currentStreak: 0,
+        bestStreak: 0,
+        objectif: 5,
+      };
     const sessions = user.sessions;
     const total = sessions.length;
     const successes = sessions.filter((s) => s.success).length;
@@ -47,7 +55,9 @@ export function useProgression() {
   }
 
   function generatePin() {
-    return Array.from({ length: 4 }, () => Math.floor(Math.random() * 10)).join("");
+    return Array.from({ length: 4 }, () => Math.floor(Math.random() * 10)).join(
+      "",
+    );
   }
 
   return { loadUser, saveUser, recordSession, getStats, generatePin };

@@ -30,9 +30,9 @@ const btnStyle = computed(() => {
 // Stable wrappers — guarantee the prop function is invoked at runtime.
 // Member expressions like `props.doDown` in @event bindings can behave
 // unexpectedly across Vue compiler modes.
-const handleDown   = (e) => props.doDown?.(e);
-const handleMove   = (e) => props.doMove?.(e);
-const handleUp     = (e) => props.doUp?.(e);
+const handleDown = (e) => props.doDown?.(e);
+const handleMove = (e) => props.doMove?.(e);
+const handleUp = (e) => props.doUp?.(e);
 const handleCancel = (e) => props.doCancel?.(e);
 </script>
 
