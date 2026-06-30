@@ -40,7 +40,7 @@
     "build": "vite-ssg build",
     "preview": "vite preview",
     "lint": "biome check .",
-    "format": "biome format --write . && biome check . --write"
+    "format": "biome format --write . && biome check . --write --unsafe"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.1",
