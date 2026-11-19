@@ -47,7 +47,7 @@ Les contributions sont les bienvenues, qu'elles viennent de développeurs ou de 
 - Résidence la Belle Vie — Pontivy
 - Jérémy Jaskolski — initiative et conception pédagogique
 - Alice Dupas — contribution
-- Cédric Ruiu — développement web
+- Cédric Ruiu — développement web ([cedric-ruiu.fr](https://cedric-ruiu.fr))
 - Son d'applaudissements : [La Sonothèque](https://lasonotheque.org) — licence libre (équivalent domaine public), utilisé avec gratitude.
 
 ---
@@ -83,6 +83,10 @@ Contributions are welcome from developers and field professionals alike!
 
 ### Credits
 
+- Résidence la Belle Vie — Pontivy
+- Jérémy Jaskolski — initiative and educational design
+- Alice Dupas — contribution
+- Cédric Ruiu — web development ([cedric-ruiu.fr](https://cedric-ruiu.fr))
 - Applause sound: [La Sonothèque](https://lasonotheque.org) — free license (public domain equivalent), used with gratitude.
 
 ---

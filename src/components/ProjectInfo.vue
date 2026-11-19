@@ -106,6 +106,13 @@ const updatedDate = computed(() =>
       <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-2">{{ t("project.creditsTitle") }}</h2>
       <ul class="text-gray-400 text-xs leading-relaxed space-y-1">
         <li v-for="(item, i) in tm('project.creditsList')" :key="i">{{ rt(item) }}</li>
+        <li>
+          <a href="https://cedric-ruiu.fr" target="_blank" rel="author noopener" data-umami-event="author-site"
+             class="text-gray-300 underline hover:text-white transition-colors">Cédric Ruiu</a>
+          — {{ t("project.creditsAuthorRole") }}
+          (<a href="https://cedric-ruiu.fr" target="_blank" rel="noopener" data-umami-event="author-site"
+             class="text-gray-300 underline hover:text-white transition-colors">cedric-ruiu.fr</a>)
+        </li>
         <li class="pt-2">
           {{ t("project.creditsSoundLabel") }}
           <a href="https://lasonotheque.org" target="_blank" rel="noopener noreferrer"

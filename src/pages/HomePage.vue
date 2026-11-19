@@ -70,7 +70,8 @@ useHead(() => {
     creator: {
       "@type": "Person",
       name: "Cédric Ruiu",
-      url: "https://github.com/Cedric-ruiu",
+      url: "https://cedric-ruiu.fr",
+      sameAs: ["https://github.com/Cedric-ruiu"],
     },
     license: "https://opensource.org/licenses/MIT",
     codeRepository: "https://github.com/Cedric-ruiu/atm-trainer",
