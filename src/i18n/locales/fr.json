@@ -81,9 +81,9 @@
     "creditsList": [
       "Résidence la Belle Vie — Pontivy",
       "Jérémy Jaskolski — initiative et conception pédagogique",
-      "Alice Dupas — contribution",
-      "Cédric Ruiu — développement web"
+      "Alice Dupas — contribution"
     ],
+    "creditsAuthorRole": "développement web",
     "creditsSoundLabel": "Son d'applaudissements :",
     "creditsSoundLink": "La Sonothèque",
     "creditsSoundSuffix": "— licence libre (équivalent domaine public)."

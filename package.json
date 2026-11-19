@@ -33,7 +33,7 @@
   "bugs": {
     "url": "https://github.com/Cedric-ruiu/atm-trainer/issues"
   },
-  "author": "Cédric Ruiu <cedric.ruiu@gmail.com>",
+  "author": "Cédric Ruiu <cedric.ruiu@gmail.com> (https://cedric-ruiu.fr)",
   "license": "MIT",
   "scripts": {
     "dev": "vite",
